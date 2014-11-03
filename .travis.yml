@@ -15,3 +15,4 @@ deploy:
     production: memberbook
   on:
     repo: dobestan/memberbook.co.kr
+  strategy: git
