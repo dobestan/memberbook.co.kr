@@ -6,9 +6,8 @@ class WelcomeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "help should return 404" do
-    # failing test
+  test "help should return 200" do
     get :about
-    assert_response :missing #404
+    assert_response :success
   end
 end
