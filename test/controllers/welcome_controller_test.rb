@@ -5,4 +5,10 @@ class WelcomeControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
+
+  test "help should return 404" do
+    # failing test
+    get :about
+    assert_response :missing #404
+  end
 end
