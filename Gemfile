@@ -41,4 +41,5 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'minitest-reporters'
+  gem 'guard-minitest'
 end
