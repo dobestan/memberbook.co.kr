@@ -47,3 +47,7 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'guard-minitest'
 end
+
+# SMS 발송하기 ( API Store > 대용량 SMS 발송 )
+# POST 방식으로 발송하기 때문에 필요
+gem 'rest-client'
