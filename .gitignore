@@ -17,3 +17,8 @@
 
 # Ignore Spring files.
 /spring/*.pid
+
+# Ignore application configuration
+# /config/application.yml
+#
+# 우리는 어차피 Private Repo 를 사용함으로 단순히 변수 저장용으로만 사용
