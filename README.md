@@ -1,6 +1,9 @@
 memberbook.co.kr
 ---
 
+# Travis CI
+[![Build Status](https://magnum.travis-ci.com/dobestan/memberbook.co.kr.svg?token=EYvfmGtgmwuF771jvzh8&branch=develop)](https://magnum.travis-ci.com/dobestan/memberbook.co.kr)
+
 # Requirements
 ```
 $ brew install postgresql
