@@ -11,10 +11,8 @@ deploy:
   api_key:
     secure: BBi5jzOKCbmZfgdSw5gSsaqgWm4mLjxBi1g40PbIDXLm5w7LLalrLxE7cSDpMjxsLB9jjD8Q7dJuAecF3wosF0oGxG/mjno1C/KxiiXQRv6u0wEXbYzN4y1iliM0jqVmZyyt+LbCx4fMg1OT2of60JD+SOExupLjU1mDk4QU4rw=
   app: memberbook-dev
-    develop: memberbook-dev
-    production: memberbook
   on:
-    repo: dobestan/memberbook.co.kr
+    all_branches: true
   strategy: git
 addons:
   postgresql: "9.3"

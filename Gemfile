@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+ruby '2.0.0'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -47,3 +48,10 @@ group :development, :test do
   gem 'minitest-reporters'
   gem 'guard-minitest'
 end
+
+# SMS 발송하기 ( API Store > 대용량 SMS 발송 )
+# POST 방식으로 발송하기 때문에 필요
+gem 'rest-client'
+
+# 환경변수를 저장하기 위해서 필요
+gem 'figaro'

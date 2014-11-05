@@ -1,0 +1,11 @@
+# 명명 규칙
+# API_[API_NAME]_[KEY_NAME] 으로 정한다.
+#   - API_SMS_id
+#   - API_Facebook_secert_key
+#   - API_Kakao_key
+
+# API Store > 대용량 SMS 서비스 ( API_SMS_[KEY_NAME] )
+API_SMS_id: "dobestan"
+API_SMS_send_phone: "01022205736"
+API_SMS_apiVersion: "1"
+API_SMS_clientKey: "MTkyMC0xNDEzODU0NTAwMzU3LTllM2VkOTM3LTYwMTEtNGU2Zi1iZWQ5LTM3NjAxMTNlNmYyMg=="
