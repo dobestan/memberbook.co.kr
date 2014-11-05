@@ -1,12 +1,19 @@
 module MessagesHelper
   class SMS_API
     def SMS_API.send_SMS(kwargs)
+      # 이 부분은 매번 변경되는 부분
       send_time = kwargs[:send_time] if kwargs[:send_time]
-      dest_phone = kwargs[:dest_phone] if kwargs[:dest_phone] # 없을 경우에는 예외처리 필요
       send_phone = kwargs[:send_phone] ? kwargs[:send_phone] : ENV["API_SMS_send_phone"]
-      msg_body = kwargs[:msg_body] if kwargs[:msg_body] # 없을 경우에는 예외처리
+
+      # 이 부분은 매번 변경되고 예외처리가 필요한 부분
+      # 예외처리는 일단 클라이언트단에서도 확실히 차단하되, 혹시나 모를 경우를 대비해서 서버단에서도 예외 발생
+      # SMS_API 모듈을 호출하는 곳에서 예외처리를 해서 사용자한테 알람을 뿌려주기
+      raise ArgumentError, "반드시 수신자 전화번호가 입력되어야 합니다." if kwargs[:dest_phone].nil?
+      raise ArgumentError, "반드시 메시지 본문 내용이 입력되어야 합니다." if kwargs[:msg_body].nil?
+
+      # 이 부분은 자주 변경되지 않는 부분
       apiVersion = kwargs[:apiVersion] ? kwargs[:apiVersion] : ENV["API_SMS_apiVersion"]
-      id = kwargs[:id] ? kwargs[:id] : ENV["API_SMS_id"]
+      id = ENV["API_SMS_id"]
 
       # 이 함수에 대한 구현은 기본적으로 API Store에서 제공하는 소스를 사용하였다.
       # 다만 조금 더 추상화하여 사용할 수 있도록 한다.
