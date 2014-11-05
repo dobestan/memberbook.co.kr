@@ -11,6 +11,9 @@ module MessagesHelper
       raise ArgumentError, "반드시 수신자 전화번호가 입력되어야 합니다." if kwargs[:dest_phone].nil?
       raise ArgumentError, "반드시 메시지 본문 내용이 입력되어야 합니다." if kwargs[:msg_body].nil?
 
+      dest_phone = kwargs[:dest_phone]
+      msg_body = kwargs[:msg_body]
+
       # 이 부분은 자주 변경되지 않는 부분
       apiVersion = kwargs[:apiVersion] ? kwargs[:apiVersion] : ENV["API_SMS_apiVersion"]
       id = ENV["API_SMS_id"]
@@ -22,7 +25,7 @@ module MessagesHelper
       httpmethod = "POST"
 
       #api url
-      url = "http://api.openapi.io/ppurio/1/message/sms/" + ENV["API_SMS_id"]
+      url = "http://api.openapi.io/ppurio/" + ENV["API_SMS_apiVersion"] + "/message/sms/" + ENV["API_SMS_id"]
 
       #api parameters
       parameters = {}
