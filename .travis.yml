@@ -1,8 +1,8 @@
 language: ruby
 rvm:
 - 2.0.0-p481
-env:
-- DB=sqlite
+before_script:
+  - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
 script:
 - RAILS_ENV=test bundle exec rake --trace db:migrate test
 deploy:
@@ -16,3 +16,5 @@ deploy:
   on:
     repo: dobestan/memberbook.co.kr
   strategy: git
+addons:
+  postgresql: "9.3"
