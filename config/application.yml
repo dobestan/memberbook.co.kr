@@ -9,3 +9,7 @@ API_SMS_id: "dobestan"
 API_SMS_send_phone: "01022205736"
 API_SMS_apiVersion: "1"
 API_SMS_clientKey: "MTkyMC0xNDEzODU0NTAwMzU3LTllM2VkOTM3LTYwMTEtNGU2Zi1iZWQ5LTM3NjAxMTNlNmYyMg=="
+
+API_Google_Analytics_key: "UA-56313696-1"
+test:
+  API_Google_Analytics_key: ~
