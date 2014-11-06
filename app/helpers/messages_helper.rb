@@ -4,15 +4,19 @@ module MessagesHelper
     # 한글 41자 이상부터는 LMS로 전송
     # 과금에 대한 부분은 클라이언트에서 처리하기
 
-    def SMS_API.get_SMS_result
-      httpmethod = "GET"
+    def SMS_API.get_SMS_result(kwargs)
+      # GET 요청 보낼 URL을 생성하기 위해 추가되었다.
+      require 'addressable/uri'
 
-      url = "http://api.openapi.io/ppurio/" + ENV["API_SMS_apiVersion"] + "/message/sms/" + ENV["API_SMS_id"]
+      raise ArgumentError, "반드시 cmid가 입력되어야 합니다." if kwargs[:cmid].nil?
+
+      httpmethod = "GET"
+      url = "http://api.openapi.io/ppurio/" + ENV["API_SMS_apiVersion"] + "/message/report/" + ENV["API_SMS_id"]
 
       #api parameters
       parameters = {}
+      parameters = parameters.merge({"cmid" => kwargs[:cmid]})
       parameters = parameters.merge({"id" => "dobestan"})
-      parameters = parameters.merge({"cmid" => "201411061535168657820"})
 
       #request header (contentType, clientKey)
       contentType = "application/x-www-form-urlencoded"

@@ -6,6 +6,6 @@ class MessagesController < ApplicationController
   end
 
   def result
-    render text: SMS_API.get_SMS_result()
+    render text: SMS_API.get_SMS_result(cmid: "201411061547278554370")
   end
 end
