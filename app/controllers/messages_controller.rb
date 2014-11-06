@@ -15,6 +15,11 @@ class MessagesController < ApplicationController
     #   - 이거는 sidekiq 같은 스케쥴러(?)를 사용하면 해결할 수 있지 않을까?
   end
 
+  def send_email
+    EMAIL_API.send_email()
+    render text: "hello world"
+  end
+
   def result
     render json: SMS_API.get_SMS_result(cmid: "201411061547278554370")
   end

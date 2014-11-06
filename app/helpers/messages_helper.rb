@@ -1,4 +1,15 @@
 module MessagesHelper
+  class EMAIL_API
+    def EMAIL_API.send_email()
+      RestClient.post "https://api:key-5107e2742efcc76937901c6db2382537"\
+      "@api.mailgun.net/v2/memberbook.co.kr/messages",
+      from: "멤버북 <contact@memberbook.co.kr>",
+      to: "dobestan@gmail.com",
+      subject: "[테스트] 멤버북 - mailgun 테스트 이메일",
+      text: "본 메일은 테스트 목적으로 발송되었습니다."
+    end
+  end
+
   class SMS_API
     # 한글 40자 까지는SMS로 전송( 80 byte )
     # 한글 41자 이상부터는 LMS로 전송
