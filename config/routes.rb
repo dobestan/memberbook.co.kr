@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   match '/about', to: 'welcome#about', via: :GET
   match '/test', to: 'messages#index', via: :GET
+  match '/result', to: 'messages#result',via: :GET
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
