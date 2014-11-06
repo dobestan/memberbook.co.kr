@@ -1,12 +1,12 @@
 module MessagesHelper
   class EMAIL_API
     def EMAIL_API.send_email()
-      url = "https://api:key-5107e2742efcc76937901c6db2382537"\
-            "@api.mailgun.net/v2/memberbook.co.kr/messages"
+      url = "https://api:" + ENV["API_MAILGUN_key"] + "@" + ENV["API_MAILGUN_base_url"] + "/messages"
+      from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
 
       #api parameters
       parameters = {}
-      parameters = parameters.merge({"from" => "멤버북 <contact@memberbook.co.kr>"})
+      parameters = parameters.merge({"from" => from})
       parameters = parameters.merge({"to" => "dobestan@gmail.com"})
       parameters = parameters.merge({"subject" => "[테스트] 메일 2개씩 발송되면 안되는데"})
       parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})

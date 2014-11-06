@@ -10,6 +10,13 @@ API_SMS_send_phone: "01022205736"
 API_SMS_apiVersion: "1"
 API_SMS_clientKey: "MTkyMC0xNDEzODU0NTAwMzU3LTllM2VkOTM3LTYwMTEtNGU2Zi1iZWQ5LTM3NjAxMTNlNmYyMg=="
 
+# MailGun > REST Email 서비스 ( API_MAILGUN_[KEY_NAME] )
+API_MAILGUN_key: "key-5107e2742efcc76937901c6db2382537"
+API_MAILGUN_base_url: "api.mailgun.net/v2/memberbook.co.kr"
+API_MAILGUN_default_send_username: "멤버북"
+API_MAILGUN_default_send_email: "contact@memberbook.co.kr"
+
+# Google Analytics ( API_Google_Analytics_[KEY_NAME] )
 API_Google_Analytics_key: "UA-56313696-1"
 test:
   API_Google_Analytics_key: ~
