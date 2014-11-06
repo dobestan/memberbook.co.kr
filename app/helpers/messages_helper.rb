@@ -1,12 +1,23 @@
 module MessagesHelper
   class EMAIL_API
     def EMAIL_API.send_email()
-      RestClient.post "https://api:key-5107e2742efcc76937901c6db2382537"\
-      "@api.mailgun.net/v2/memberbook.co.kr/messages",
-      from: "멤버북 <contact@memberbook.co.kr>",
-      to: "dobestan@gmail.com",
-      subject: "[테스트] 멤버북 - mailgun 테스트 이메일",
-      text: "본 메일은 테스트 목적으로 발송되었습니다."
+      url = "https://api:key-5107e2742efcc76937901c6db2382537"\
+            "@api.mailgun.net/v2/memberbook.co.kr/messages"
+
+      #api parameters
+      parameters = {}
+      parameters = parameters.merge({"from" => "멤버북 <contact@memberbook.co.kr>"})
+      parameters = parameters.merge({"to" => "dobestan@gmail.com"})
+      parameters = parameters.merge({"subject" => "[테스트] 메일 2개씩 발송되면 안되는데"})
+      parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})
+
+      httpResponse = RestClient.post url, parameters
+
+      response = HttpResponse.new
+      response.code = httpResponse.code
+      response.headers = httpResponse.headers
+      response.raw_body = httpResponse
+      return response.raw_body
     end
   end
 

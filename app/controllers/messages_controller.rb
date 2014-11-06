@@ -16,8 +16,7 @@ class MessagesController < ApplicationController
   end
 
   def send_email
-    EMAIL_API.send_email()
-    render text: "hello world"
+    render json: EMAIL_API.send_email
   end
 
   def result
