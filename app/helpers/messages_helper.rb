@@ -4,6 +4,27 @@ module MessagesHelper
     # 한글 41자 이상부터는 LMS로 전송
     # 과금에 대한 부분은 클라이언트에서 처리하기
 
+    def SMS_API.get_SMS_result
+      httpmethod = "GET"
+
+      url = "http://api.openapi.io/ppurio/" + ENV["API_SMS_apiVersion"] + "/message/sms/" + ENV["API_SMS_id"]
+
+      #api parameters
+      parameters = {}
+      parameters = parameters.merge({"id" => "dobestan"})
+      parameters = parameters.merge({"cmid" => "201411061535168657820"})
+
+      #request header (contentType, clientKey)
+      contentType = "application/x-www-form-urlencoded"
+      clientKey = ENV["API_SMS_clientKey"]
+
+      #send request
+      response = HttpClient.do_request(httpmethod, url, parameters, clientKey, contentType)
+
+      #api response
+      return response
+    end
+
     def SMS_API.send_SMS(kwargs)
       # 이 부분은 매번 변경되는 부분
       send_time = kwargs[:send_time] if kwargs[:send_time]

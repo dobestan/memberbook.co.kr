@@ -53,5 +53,9 @@ end
 # POST 방식으로 발송하기 때문에 필요
 gem 'rest-client'
 
+# SMS 전송 결과 받아오기 ( API Store > 대용량 SMS 발송 )
+# GET 방식으로 받아오기 때문에 필요
+gem 'addressable'
+
 # 환경변수를 저장하기 위해서 필요
 gem 'figaro'
