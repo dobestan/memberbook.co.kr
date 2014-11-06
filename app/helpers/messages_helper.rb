@@ -1,5 +1,9 @@
 module MessagesHelper
   class SMS_API
+    # 한글 40자 까지는SMS로 전송( 80 byte )
+    # 한글 41자 이상부터는 LMS로 전송
+    # 과금에 대한 부분은 클라이언트에서 처리하기
+
     def SMS_API.send_SMS(kwargs)
       # 이 부분은 매번 변경되는 부분
       send_time = kwargs[:send_time] if kwargs[:send_time]
@@ -25,6 +29,8 @@ module MessagesHelper
       httpmethod = "POST"
 
       #api url
+      # 일단 80byte가 넘어가면 자동으로 LMS로 변경 ( API 에서 제공하는 기능 )
+      # 우리가 신경쓰지 않아도 되는 부분
       url = "http://api.openapi.io/ppurio/" + ENV["API_SMS_apiVersion"] + "/message/sms/" + ENV["API_SMS_id"]
 
       #api parameters
