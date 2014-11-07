@@ -16,7 +16,11 @@ class MessagesController < ApplicationController
   end
 
   def send_email
-    render json: EMAIL_API.send_email
+    render json: EMAIL_API.send_email(
+      to: "dobestan@gmail.com",
+      subject: "테스트",
+      text: "본 이메일은 테스트 목적으로 발송되었습니다."
+    )
   end
 
   def result
