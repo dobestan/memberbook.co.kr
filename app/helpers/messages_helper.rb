@@ -1,16 +1,33 @@
 module MessagesHelper
+  # 일단 문자보내기, 이메일 발송하기는
+  # 단순히 API를 사용하는 것이므로 여기서 구현되어야 한다.
+  #
+  # 다만, 단체 문자 보내기 혹은 단체 이메일 보내기 기능은
+  # 컨트롤러 / 모델에서 구현되어야 한다.
+
   class EMAIL_API
-    def EMAIL_API.send_email()
+    def EMAIL_API.send_email(kwargs)
+      raise ArgumentError, "반드시 to가 입력되어야 합니다." if kwargs[:to].nil?
+      raise ArgumentError, "반드시 subject가 입력되어야 합니다." if kwargs[:subject].nil?
+      raise ArgumentError, "반드시 text가 입력되어야 합니다." if kwargs[:text].nil?
+
       httpmethod = "POST"
       url = "https://api:" + ENV["API_MAILGUN_key"] + "@" + ENV["API_MAILGUN_base_url"] + "/messages"
-      from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
+
+      if kwargs[:from]
+        from = kwargs[:from]
+      else
+        # 발신자 정보가 주어지지 않으면,
+        # 기본적으로 contact@memberbook.co.kr 을 기준으로 발송
+        from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
+      end
 
       #api parameters
       parameters = {}
       parameters = parameters.merge({"from" => from})
-      parameters = parameters.merge({"to" => "dobestan@gmail.com"})
-      parameters = parameters.merge({"subject" => "[테스트] 이메일 테스트"})
-      parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})
+      parameters = parameters.merge({"to" => kwargs[:to]})
+      parameters = parameters.merge({"subject" => kwargs[:subject]})
+      parameters = parameters.merge({"text" => kwargs[:text]})
 
       response = HttpClient.do_request(httpmethod: httpmethod, url: url, parameters: parameters)
 

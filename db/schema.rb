@@ -11,14 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141105151029) do
+ActiveRecord::Schema.define(version: 20141107111503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "message_groups", force: true do |t|
+    t.string  "body"
+    t.integer "message_type"
+  end
+
   create_table "messages", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "message_group_id"
+    t.integer "result"
+    t.string  "cmid"
   end
 
 end
