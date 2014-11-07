@@ -1,4 +1,26 @@
 module MessagesHelper
+  class EMAIL_API
+    def EMAIL_API.send_email()
+      url = "https://api:" + ENV["API_MAILGUN_key"] + "@" + ENV["API_MAILGUN_base_url"] + "/messages"
+      from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
+
+      #api parameters
+      parameters = {}
+      parameters = parameters.merge({"from" => from})
+      parameters = parameters.merge({"to" => "dobestan@gmail.com"})
+      parameters = parameters.merge({"subject" => "[테스트] 메일 2개씩 발송되면 안되는데"})
+      parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})
+
+      httpResponse = RestClient.post url, parameters
+
+      response = HttpResponse.new
+      response.code = httpResponse.code
+      response.headers = httpResponse.headers
+      response.raw_body = httpResponse
+      return response.raw_body
+    end
+  end
+
   class SMS_API
     # 한글 40자 까지는SMS로 전송( 80 byte )
     # 한글 41자 이상부터는 LMS로 전송
