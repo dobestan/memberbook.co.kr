@@ -17,17 +17,14 @@ ActiveRecord::Schema.define(version: 20141107111503) do
   enable_extension "plpgsql"
 
   create_table "message_groups", force: true do |t|
-    t.string   "body"
-    t.integer  "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "body"
+    t.integer "message_type"
   end
 
   create_table "messages", force: true do |t|
-    t.integer  "message_group_id"
-    t.integer  "result"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "message_group_id"
+    t.integer "result"
+    t.string  "cmid"
   end
 
 end

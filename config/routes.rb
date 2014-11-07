@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   match '/about', to: 'welcome#about', via: :GET
+  match '/send_sms', to: 'messages#send_sms', via: :GET
   match '/test', to: 'messages#index', via: :GET
   match '/result', to: 'messages#result',via: :GET
   match '/email', to: 'messages#send_email',via: :GET

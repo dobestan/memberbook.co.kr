@@ -10,9 +10,14 @@ class CreateMessageGroups < ActiveRecord::Migration
       #   - 보낸 메시지 정보
 
       t.string :body
-      t.integer :type
-
-      t.timestamps
+      t.integer :message_type # 0 번은 혹시나 type을 명시하지 않은 경우를 대비하기 위해서 사용하지 말자
+                              # 1 번 : SMS
+                              # 2 번 : LMS
+                              # 3 번 : MMS ( 다만, 처음에는 MMS를 지원하지 않는다. )
+                              # 4 번 : Email
+                              #
+                              # 여기서부터는 추후 개발
+                              # 5 번 : Push 등
+      end
     end
-  end
 end
