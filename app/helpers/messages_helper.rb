@@ -1,6 +1,7 @@
 module MessagesHelper
   class EMAIL_API
     def EMAIL_API.send_email()
+      httpmethod = "POST"
       url = "https://api:" + ENV["API_MAILGUN_key"] + "@" + ENV["API_MAILGUN_base_url"] + "/messages"
       from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
 
@@ -8,16 +9,13 @@ module MessagesHelper
       parameters = {}
       parameters = parameters.merge({"from" => from})
       parameters = parameters.merge({"to" => "dobestan@gmail.com"})
-      parameters = parameters.merge({"subject" => "[테스트] 메일 2개씩 발송되면 안되는데"})
+      parameters = parameters.merge({"subject" => "[테스트] 이메일 테스트"})
       parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})
 
-      httpResponse = RestClient.post url, parameters
+      response = HttpClient.do_request(httpmethod: httpmethod, url: url, parameters: parameters)
 
-      response = HttpResponse.new
-      response.code = httpResponse.code
-      response.headers = httpResponse.headers
-      response.raw_body = httpResponse
-      return response.raw_body
+      #api response
+      return response
     end
   end
 
@@ -44,8 +42,17 @@ module MessagesHelper
       contentType = "application/x-www-form-urlencoded"
       clientKey = ENV["API_SMS_clientKey"]
 
+      headers = {}
+      headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
+      headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+
       #send request
-      response = HttpClient.do_request(httpmethod, url, parameters, clientKey, contentType)
+      response = HttpClient.do_request(
+        url: url,
+        httpmethod: httpmethod,
+        parameters: parameters,
+        headers: headers
+      )
 
       #api response
       return response
