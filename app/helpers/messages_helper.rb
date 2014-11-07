@@ -93,8 +93,17 @@ module MessagesHelper
       contentType = "application/x-www-form-urlencoded"
       clientKey = ENV["API_SMS_clientKey"]
 
+      headers = {}
+      headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
+      headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+
       #send request
-      response = HttpClient.do_request(httpmethod, url, parameters, clientKey, contentType)
+      response = HttpClient.do_request(
+        url: url,
+        httpmethod: httpmethod,
+        parameters: parameters,
+        headers: headers
+      )
 
       #api response
       return response
@@ -110,45 +119,53 @@ module MessagesHelper
 
   class HttpClient
 
-    def HttpClient.do_request(method, url, parameters, clientKey, content_type)
-      return internal_do_request(method, url, parameters, clientKey, content_type)
+    def HttpClient.do_request(kwargs)
+      return internal_do_request(kwargs)
     end
 
     def HttpClient.setResponse(output_response)
            output_response.body = output_response.raw_body
     end
 
-    def HttpClient.internal_do_request(method, url, parameters, clientKey, content_type)
-       httpResponse = nil;
+    def HttpClient.internal_do_request(kwargs)
+      # 필수 파라미터
+      #   - url
+      raise ArgumentError, "반드시 url이 입력되어야 합니다." if kwargs[:url].nil?
+      url = kwargs[:url]
 
-       headers = {}
-       headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
-       headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+      # 옵션 파라미터
+      #   - method
+      #   - parameters
+      #   - headers
+      httpmethod = kwargs[:httpmethod] ? kwargs[:httpmethod] : "GET"
+      parameters = kwargs[:parameters] ? kwargs[:parameters] : {}
+      headers = kwargs[:headers] ? kwargs[:headers] : {}
 
-       begin
-        case method
-          when method = "GET"
+      httpResponse = nil;
+
+      begin
+        case httpmethod
+          when httpmethod = "GET"
             uri = Addressable::URI.new
             uri.query_values = parameters
             httpResponse = RestClient.get url + "?" + uri.query, headers
-          when method = "POST"
+          when httpmethod = "POST"
             httpResponse = RestClient.post url, parameters, headers
-            puts "method ::" + method
-          when method = "PUT"
+          when httpmethod = "PUT"
             httpResponse = RestClient.put url, parameters, headers
-            puts "method ::" + method
-          when method = "DELETE"
+          when httpmethod = "DELETE"
             httpResponse = RestClient.delete url, parameters, headers
-            puts "method ::" + method
         end
+
         rescue => e
-          httpResponse = e.response
-       end
-       response = HttpResponse.new
-       response.code = httpResponse.code
-       response.headers = httpResponse.headers
-       response.raw_body = httpResponse
-       return response.raw_body
+        httpResponse = e.response
+      end
+
+      response = HttpResponse.new
+      response.code = httpResponse.code
+      response.headers = httpResponse.headers
+      response.raw_body = httpResponse
+      return response.raw_body
     end
   end
 end
