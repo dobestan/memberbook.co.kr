@@ -1,4 +1,10 @@
 module MessagesHelper
+  # 일단 문자보내기, 이메일 발송하기는
+  # 단순히 API를 사용하는 것이므로 여기서 구현되어야 한다.
+  #
+  # 다만, 단체 문자 보내기 혹은 단체 이메일 보내기 기능은
+  # 컨트롤러 / 모델에서 구현되어야 한다.
+
   class EMAIL_API
     def EMAIL_API.send_email(kwargs)
       raise ArgumentError, "반드시 to가 입력되어야 합니다." if kwargs[:to].nil?
