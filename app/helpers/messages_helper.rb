@@ -1,6 +1,7 @@
 module MessagesHelper
   class EMAIL_API
     def EMAIL_API.send_email()
+      httpmethod = "POST"
       url = "https://api:" + ENV["API_MAILGUN_key"] + "@" + ENV["API_MAILGUN_base_url"] + "/messages"
       from = ENV["API_MAILGUN_default_send_username"] + " <" + ENV["API_MAILGUN_default_send_email"]+ ">"
 
@@ -8,16 +9,13 @@ module MessagesHelper
       parameters = {}
       parameters = parameters.merge({"from" => from})
       parameters = parameters.merge({"to" => "dobestan@gmail.com"})
-      parameters = parameters.merge({"subject" => "[테스트] 메일 2개씩 발송되면 안되는데"})
+      parameters = parameters.merge({"subject" => "[테스트] 이메일 테스트"})
       parameters = parameters.merge({"text" => "본 메일은 테스트 목적으로 발송되었습니다."})
 
-      httpResponse = RestClient.post url, parameters
+      response = HttpClient.do_request(httpmethod: httpmethod, url: url, parameters: parameters)
 
-      response = HttpResponse.new
-      response.code = httpResponse.code
-      response.headers = httpResponse.headers
-      response.raw_body = httpResponse
-      return response.raw_body
+      #api response
+      return response
     end
   end
 
@@ -44,8 +42,17 @@ module MessagesHelper
       contentType = "application/x-www-form-urlencoded"
       clientKey = ENV["API_SMS_clientKey"]
 
+      headers = {}
+      headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
+      headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+
       #send request
-      response = HttpClient.do_request(httpmethod, url, parameters, clientKey, contentType)
+      response = HttpClient.do_request(
+        url: url,
+        httpmethod: httpmethod,
+        parameters: parameters,
+        headers: headers
+      )
 
       #api response
       return response
@@ -93,8 +100,17 @@ module MessagesHelper
       contentType = "application/x-www-form-urlencoded"
       clientKey = ENV["API_SMS_clientKey"]
 
+      headers = {}
+      headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
+      headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+
       #send request
-      response = HttpClient.do_request(httpmethod, url, parameters, clientKey, contentType)
+      response = HttpClient.do_request(
+        url: url,
+        httpmethod: httpmethod,
+        parameters: parameters,
+        headers: headers
+      )
 
       #api response
       return response
@@ -110,45 +126,53 @@ module MessagesHelper
 
   class HttpClient
 
-    def HttpClient.do_request(method, url, parameters, clientKey, content_type)
-      return internal_do_request(method, url, parameters, clientKey, content_type)
+    def HttpClient.do_request(kwargs)
+      return internal_do_request(kwargs)
     end
 
     def HttpClient.setResponse(output_response)
            output_response.body = output_response.raw_body
     end
 
-    def HttpClient.internal_do_request(method, url, parameters, clientKey, content_type)
-       httpResponse = nil;
+    def HttpClient.internal_do_request(kwargs)
+      # 필수 파라미터
+      #   - url
+      raise ArgumentError, "반드시 url이 입력되어야 합니다." if kwargs[:url].nil?
+      url = kwargs[:url]
 
-       headers = {}
-       headers = headers.merge({"x-waple-authorization" => (clientKey).chomp.gsub(/\n/,'')})
-       headers = headers.merge({"Content-Type" => "application/x-www-form-urlencoded"})
+      # 옵션 파라미터
+      #   - method
+      #   - parameters
+      #   - headers
+      httpmethod = kwargs[:httpmethod] ? kwargs[:httpmethod] : "GET"
+      parameters = kwargs[:parameters] ? kwargs[:parameters] : {}
+      headers = kwargs[:headers] ? kwargs[:headers] : {}
 
-       begin
-        case method
-          when method = "GET"
+      httpResponse = nil;
+
+      begin
+        case httpmethod
+          when httpmethod = "GET"
             uri = Addressable::URI.new
             uri.query_values = parameters
             httpResponse = RestClient.get url + "?" + uri.query, headers
-          when method = "POST"
+          when httpmethod = "POST"
             httpResponse = RestClient.post url, parameters, headers
-            puts "method ::" + method
-          when method = "PUT"
+          when httpmethod = "PUT"
             httpResponse = RestClient.put url, parameters, headers
-            puts "method ::" + method
-          when method = "DELETE"
+          when httpmethod = "DELETE"
             httpResponse = RestClient.delete url, parameters, headers
-            puts "method ::" + method
         end
+
         rescue => e
-          httpResponse = e.response
-       end
-       response = HttpResponse.new
-       response.code = httpResponse.code
-       response.headers = httpResponse.headers
-       response.raw_body = httpResponse
-       return response.raw_body
+        httpResponse = e.response
+      end
+
+      response = HttpResponse.new
+      response.code = httpResponse.code
+      response.headers = httpResponse.headers
+      response.raw_body = httpResponse
+      return response.raw_body
     end
   end
 end
