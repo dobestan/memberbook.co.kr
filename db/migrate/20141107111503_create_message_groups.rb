@@ -10,7 +10,7 @@ class CreateMessageGroups < ActiveRecord::Migration
       #   - 보낸 메시지 정보
 
       t.string :body
-      t.string :type
+      t.integer :type
 
       t.timestamps
     end

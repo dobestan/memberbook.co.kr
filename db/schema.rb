@@ -18,12 +18,14 @@ ActiveRecord::Schema.define(version: 20141107111503) do
 
   create_table "message_groups", force: true do |t|
     t.string   "body"
-    t.string   "type"
+    t.integer  "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "messages", force: true do |t|
+    t.integer  "message_group_id"
+    t.integer  "result"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
