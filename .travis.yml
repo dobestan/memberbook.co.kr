@@ -11,8 +11,6 @@ deploy:
   api_key:
     secure: BBi5jzOKCbmZfgdSw5gSsaqgWm4mLjxBi1g40PbIDXLm5w7LLalrLxE7cSDpMjxsLB9jjD8Q7dJuAecF3wosF0oGxG/mjno1C/KxiiXQRv6u0wEXbYzN4y1iliM0jqVmZyyt+LbCx4fMg1OT2of60JD+SOExupLjU1mDk4QU4rw=
   run: 
-    - "rake db:drop"
-    - "rake db:create"
     - "rake db:migrate"
     - "rake db:seed"
   app: memberbook-dev
