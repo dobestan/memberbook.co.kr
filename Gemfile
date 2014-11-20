@@ -38,6 +38,8 @@ gem 'spring',        group: :development
 gem 'unicorn'
 
 gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 # Use Mina for Deployment
 gem 'mina'
