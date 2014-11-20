@@ -37,6 +37,8 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'sidekiq'
+
 # Use Mina for Deployment
 gem 'mina'
 
