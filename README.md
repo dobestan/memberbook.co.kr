@@ -41,3 +41,13 @@ $ foreman start
 ```
 $ foreman start -c web=2
 ```
+
+# Mina - Fast Deployment
+
+```
+$ mina setup --verbose
+```
+
+```
+$ mina deploy --verbose
+```
