@@ -49,6 +49,10 @@ group :development, :test do
   gem 'guard-minitest'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 # SMS 발송하기 ( API Store > 대용량 SMS 발송 )
 # POST 방식으로 발송하기 때문에 필요
 gem 'rest-client'
