@@ -37,6 +37,9 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 gem 'unicorn'
 
+# Use Mina for Deployment
+gem 'mina'
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
