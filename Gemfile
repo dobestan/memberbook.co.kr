@@ -51,6 +51,9 @@ gem 'mina'
 group :development, :test do
   gem 'minitest-reporters'
   gem 'guard-minitest'
+
+  gem 'pry-rails'
+  gem 'jazz_hands'
 end
 
 group :production do
