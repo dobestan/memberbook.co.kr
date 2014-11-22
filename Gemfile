@@ -35,10 +35,14 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
+# Use Mina for Deployment
+gem 'mina'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
@@ -47,6 +51,13 @@ gem 'spring',        group: :development
 group :development, :test do
   gem 'minitest-reporters'
   gem 'guard-minitest'
+
+  gem 'pry-rails'
+  gem 'jazz_hands'
+end
+
+group :production do
+  gem 'rails_12factor'
 end
 
 # SMS 발송하기 ( API Store > 대용량 SMS 발송 )

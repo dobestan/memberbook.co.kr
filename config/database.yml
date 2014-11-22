@@ -6,7 +6,7 @@
 #
 default: &default
   adapter: postgresql
-  pool: 5
+  pool: 25
   encoding: UTF8
   username: memberbook
   password: memberbook # 배포 환경에서는 변경 필수
