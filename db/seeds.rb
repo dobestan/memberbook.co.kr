@@ -33,5 +33,9 @@ when "development"
 			address: '서울시 관악구 봉천동',
 			birthday: '1993-5-1'
 			}]);
+
+	groups = Group.create([{
+			name: ''
+		}]);
 when "production"
 end
