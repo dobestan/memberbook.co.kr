@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   #   resources :products
   resources :users
 
+  # Example subdomain routes
+  # constraints subdomain: 'dashboard' do
+  #   resources :photos
+  # end
+
   # Example resource route with options:
   #   resources :products do
   #     member do

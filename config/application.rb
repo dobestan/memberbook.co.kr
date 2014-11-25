@@ -19,5 +19,8 @@ module Memberbook
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # /assets URL 접근 시, fonts 디렉토리 포함해 검색
+    config.assets.paths << "#{Rails}/vendor/assets/fonts"
   end
 end

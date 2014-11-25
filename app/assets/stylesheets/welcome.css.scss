@@ -1,3 +1,89 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Wrapper 는 레이아웃 나눔 */
+
+#bodyWrapper {
+	width: 100%;
+}
+
+#headerWrapper {
+	position: absolute;
+	width: 100%;
+	height: 80px;
+	padding: 0 30px 0;
+	z-index: 1;
+
+	#logoA {
+		display: block;
+		float: left;
+		height: 100%;
+		width: 200px;
+		background-image: asset_url("header/logo.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+
+	#elementUl {
+		position: relative;
+		float: right;
+		top: 35%;
+
+		.element {
+			display: inline-block;
+			color: white;
+			text-align: center;
+			margin: 0 10px 0;
+		}
+	}
+}
+
+#bannerWrapper {
+	width: 100%;
+	height: 600px;
+	overflow: hidden;
+
+	.img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	@for $i from 1 through 3 {
+    .item:nth-child(#{$i}) .img {
+    	background-image: asset_url("banners/service_info#{$i}.jpg");
+    }
+  }
+
+	/* carousel 높이 wrapper 에 맞추기 */
+	.carousel, .item, .active { height:100%; }
+	.carousel-inner { height:100%; }	
+}
+
+#caseWrapper {
+	width: 100%;
+
+	#caseContainer {
+		width: 80%;
+		margin: 0 auto;
+	
+		.cases {
+			.case {
+				padding: 0 12px 0;
+				height: 400px;
+
+				.img {
+					background-color: blue;
+				}
+			}
+		}
+	}
+}
+
+#footerWrapper {
+	width: 100%;
+}

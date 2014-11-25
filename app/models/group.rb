@@ -3,8 +3,6 @@ class Group < ActiveRecord::Base
 
 	has_many :children, :class_name => "Group", :foreign_key => "parent_id"
 	belongs_to :parent, :class_name => "Group"
-
-	has_many :subgroups
 	
 	scope :top_level, where(:parent_id => nil)
 
