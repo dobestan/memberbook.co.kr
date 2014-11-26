@@ -108,4 +108,52 @@
 
 #footerWrapper {
 	width: 100%;
+	background-color: #2b2d2e;
+	padding: 50px 0;
+
+	#footerContainer {
+		width: 80%;
+		margin: 0 auto;
+
+		#logo {
+			position: absolute;
+			width: 200px;
+			height: 50px;
+			background-image: url(/assets/header/logo.png);
+			background-size: contain;
+			background-repeat: no-repeat;
+			right: 100px;
+		}
+
+		#serviceNameP {
+			float: left;
+			color: #676363;
+			margin-right: 20px;
+		}
+
+		ul {
+			margin-bottom: 50px;
+		}
+
+		li {
+			display: inline-block;
+			margin-right: 25px;
+		}
+
+		dl {
+			display: inline-block;
+		}
+
+		dt {
+			display: inline-block;
+			color: #a69d9d;
+			margin-right: 10px;
+		}
+
+		dd {
+			display: inline-block;
+			color: #898080;
+			margin-right: 10px;
+		}
+	}
 }
