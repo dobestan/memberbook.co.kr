@@ -66,6 +66,18 @@
 
 #caseWrapper {
 	width: 100%;
+	color: #565a5c;
+	text-align: center;
+
+	h2 {
+		margin-top: 50px;
+		font-size: 2.5em;
+		font-weight: 600;
+	}
+
+	p {
+		margin-bottom: 50px;
+	}
 
 	#caseContainer {
 		width: 80%;
@@ -73,13 +85,23 @@
 	
 		.cases {
 			.case {
+				margin: 10px 0;
 				padding: 0 12px 0;
 				height: 400px;
 
 				.img {
-					background-color: blue;
-				}
+					height: 100%;
+					background-repeat: no-repeat;
+					background-size: cover;
+					background-position: center center;
+				}				
 			}
+
+			@for $i from 1 through 5 {
+		    .case:nth-child(#{$i}) .img {
+		    	background-image: asset_url("cases/case#{$i}.jpeg");
+		    }
+		  }
 		}
 	}
 }
