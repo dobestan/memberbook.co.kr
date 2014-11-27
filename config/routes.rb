@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   match '/result', to: 'messages#result',via: :GET
   match '/email', to: 'messages#send_email',via: :GET
 
+  match '/dashboard', to: 'dashboard#index', via: :GET
+
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
 

@@ -1,0 +1,107 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+	height: 100%;
+}
+
+#bodyWrapper {
+	height: 100%;
+}
+
+#leftSidebar {
+	position: absolute;
+	width: 260px;
+	height: 100%;
+	background-color: #42B84C;
+	box-shadow: 2px 0 10px;
+
+	#firstRow {
+		height: 55px;
+		background: rgba(255, 255, 255, 0.2);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+		#container {
+			padding: 15px 25px;
+
+			#logo {
+				background-image: asset_url("dashboard/logo.png");
+				float: left;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				background-size: contain;
+				background-repeat: no-repeat;
+			}
+
+			#titleP {
+				color: white;
+				font-weight: 600;
+				line-height: 30px;
+			}
+		}
+	}
+
+	#secondRow {
+		height: 55px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+		#container {
+			padding: 15px 25px;
+
+			#profileImg {
+				float: left;
+				background-color: yellow;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+
+			#emailP {
+				color: white;
+				font-weight: 200;
+				line-height: 30px;
+			}
+		}
+	}
+
+	#thirdRow {
+		#container {
+			padding: 15px 0;
+
+			#groupsP {
+				font-size: 0.8em;
+				color: rgba(255, 255, 255, 0.6);
+				font-weight: 100;
+				margin-left: 25px;
+			}
+
+			#groupUl {
+				color: white;
+				font-weight: 300;
+
+				.group {
+					text-indent: 25px;
+					cursor: pointer;
+
+					.align {
+						padding: 10px 0;
+					}
+
+					&.active {
+						background: rgba(255, 255, 255, 0.3);
+					}
+				}
+			}
+		}
+	}
+}
+
+#mainContent {
+	height: 100%;
+	float: right;
+	width: calc(100% - 260px);
+}
