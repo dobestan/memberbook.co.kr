@@ -104,4 +104,126 @@ html, body {
 	height: 100%;
 	float: right;
 	width: calc(100% - 260px);
+
+	#navBar {
+		margin-top: 30px;
+		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+		#elementUl {
+			text-align: center;
+
+			.element {
+				display: inline-block;
+				padding: 10px 0 15px;
+				margin-right: 40px;
+				
+				a {
+					color: #7D7D8E;
+				}
+
+				.icon {
+					display: inline-block;
+					position: relative;
+					top: 8px;
+					width: 24px;
+					height: 24px;
+					margin-right: 10px;
+					background-size: cover;
+					background-position: center center;
+				}
+
+				&.active {
+					border-bottom: 2px solid rgb(86, 205, 252);
+
+					a {
+						color: rgb(86, 205, 252);	
+					}
+				}
+			}		
+		}
+
+		@for $i from 1 through 4 {
+	    .element:nth-child(#{$i}) {
+	    	.icon {
+	    		background-image: asset_url("dashboard/navbar/element#{$i}.png");	    		
+	    	}
+
+	    	&.active {
+	    		.icon {
+						background-image: asset_url("dashboard/navbar/element#{$i}_active.png");	    			
+	    		}
+	    	}
+	    }
+	  }
+	}
+
+	#usersWrapper {
+		padding: 20px 100px 0;
+		color: #7D7D8E;
+
+		#profileUl {
+			margin-top: 20px;
+
+			.row {
+				margin: 0;
+			}
+
+			.profile {
+				position: relative;
+				cursor: pointer;
+				transition: 0.6s;
+				transform-style: preserve-3d;
+				height: 150px;
+				margin-bottom: 30px;
+
+				&.backOn {
+					transform: rotateY(180deg);
+				}
+
+				.front, .back {
+					position: absolute;
+					backface-visibility: hidden;
+					left: 0;
+					top: 0;
+					width: 100%;
+				}
+
+				.img {
+					width: 150px;
+					height: 150px;
+					border-radius: 50%;
+					overflow: hidden;					
+					background-size: cover;
+				}
+
+				.front {
+					transform: rotateY(0deg);
+
+					.img {
+						float: left;
+						background-image: asset_url("dashboard/profiles/jehyeok.jpg");
+						margin-right: 20px;
+					}
+				}
+
+				.back {
+					transform: rotateY(180deg);
+
+					.img {
+						float: right;
+						background-image: asset_url("dashboard/profiles/suchan.png");
+						margin-left: 20px;
+					}
+				}					
+
+				.name {
+					font-size: 1.5em;
+					font-weight: 400;
+				}
+
+				.subInfo {
+					font-size: 0.9em;
+				}
+			}			
+		}
+	}
 }

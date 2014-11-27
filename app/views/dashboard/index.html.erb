@@ -16,15 +16,45 @@
       <div id="container">
         <p id="groupsP">GROUPS</p>
         <ul id="groupUl">
-          <li class="group active"><div class="align">건설경영</div></li>
-          <li class="group"><div class="align">건설사업관리</div></li>
-          <li class="group"><div class="align">건축공간환경디자인</div></li>
-          <li class="group"><div class="align">건축도시디자인</div></li>
-          <li class="group"><div class="align">그린빌딩시스템</div></li>
+          <li class="group active"><div class="align"><%= @groups.first.name %></div></li>
+          <% @groups.drop(1).each do |group| %>
+            <li class="group"><div class="align"><%= group.name %></div></li>
+          <% end %>
         </ul>
       </div>
     </div>
   </div>
   <div id="mainContent">
-  <div>
-</div>
+    <div id="navBar">
+      <ul id="elementUl">
+        <li class="element active"><a href="#"><i class="icon"></i>원우목록</a></li>
+        <li class="element"><a href="#"><i class="icon"></i>그룹정보</a></li>
+        <li class="element"><a href="#"><i class="icon"></i>공지사항</a></li>
+        <li class="element"><a href="#"><i class="icon"></i>설정</a></li>
+      </ul>
+    </div>
+    <div id="usersWrapper">
+      <p id="usersP">Users</p>
+      <ul id="profileUl"> 
+        <div class="row">
+          <% @users.each do |user, idx| %>
+            <li class="col-sm-5 col-md-5 profile <%= cycle("", "col-sm-offset-1 col-md-offset-1") %>">
+              <div class="front">
+                <div class="img"></div>
+                <p class="name"><%= user.name %></p>
+                <p><%= user.grade %></p>
+              </div>
+              <div class="back">
+                <div class="img"></div>
+                <p class="name"><%= user.name %></p>
+                <p class="subInfo"><%= user.phone_number %></p>
+                <p class="subInfo"><%= user.email %></p>
+                <p class="subInfo"><%= user.address %></p>
+              </div>
+            </li>
+          <% end %>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>    

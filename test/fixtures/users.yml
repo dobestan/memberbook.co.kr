@@ -4,8 +4,24 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one: {
+	name: '현제혁',
+	phone_number: '010-3321-3748',
+	email: 'hook3748@gmail.com',
+	profile_img_name: 'profile.png',
+	grade: '3학년',
+	address: '서울시 서대문구 연희동 316-1번지',
+	birthday: '1992-11-01'
+}
 # column: value
 #
-two: {}
+two: {
+	name: '안수찬',
+	phone_number: '010-2220-5736',
+	email: 'dobestan@gmail.com',
+	profile_img_name: 'suchan.png',
+	grade: '2학년',
+	address: '서울시 관악구 봉천동',
+	birthday: '1993-5-1'
+}
 #  column: value
