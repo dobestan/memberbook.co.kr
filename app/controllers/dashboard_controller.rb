@@ -12,10 +12,15 @@ class DashboardController < ApplicationController
 		@users = @ancestor_groups.first.children.first.users
 	end
 
-	# GET /dashboard/{group_code}/{group_id}
-	# group code 는 학교 단위 ( 즉, 서비스 단위 )
+	# GET /dashboard/{group_code}/{group_id}/users.json
+	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
 	def users
-		
+		@group = Group.find(params[:group_id])
+		@users = @group.users
+
+		respond_to do |format|
+			format.json { render json: @users }
+		end
 	end
 end

@@ -78,9 +78,12 @@ when "development"
 			parent_id: 7
 		}])
 
-	# 첫번째 그룹과 유저 간 의존 생성
+	# 그룹 유저 간 의존 생성
 	# 유저 현제혁은 'EMBA의 건설 경영' 과 '중앙대 예술대학교의 산업디자인' 총 2개 그룹에 속함
 	emba_groups[1].users << users[0]
 	art_groups[1].users << users[0]
+
+	# 안수찬은 EMBA 건설사업관리에 속함
+	emba_groups[2].users << users[1]
 when "production"
 end

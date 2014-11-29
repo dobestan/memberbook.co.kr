@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   match '/email', to: 'messages#send_email',via: :GET
 
   match '/dashboard', to: 'dashboard#index', via: :GET
+  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#users', via: :GET
 
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
