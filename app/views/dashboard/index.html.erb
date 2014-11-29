@@ -16,9 +16,11 @@
       <div id="container">
         <p id="groupsP">GROUPS</p>
         <ul id="groupUl">
-          <li class="group active"><div class="align"><%= @groups.first.name %></div></li>
-          <% @groups.drop(1).each do |group| %>
-            <li class="group"><div class="align"><%= group.name %></div></li>
+          <% @ancestor_groups.each do |ancestor_group| %>
+            <li class="group ancestor"><div class="align"><%= ancestor_group.name %></div></li>
+            <% ancestor_group.children.each do |group| %>
+              <li class="group"><div class="align"><%= group.name %></div></li>
+            <% end %>
           <% end %>
         </ul>
       </div>
@@ -37,7 +39,7 @@
       <p id="usersP">Users</p>
       <ul id="profileUl"> 
         <div class="row">
-          <% @users.each do |user, idx| %>
+          <% @users.each do |user| %>
             <li class="col-sm-5 col-md-5 profile <%= cycle("", "col-sm-offset-1 col-md-offset-1") %>">
               <div class="front">
                 <div class="img"></div>
@@ -57,4 +59,4 @@
       </ul>
     </div>
   </div>
-</div>    
+</div>

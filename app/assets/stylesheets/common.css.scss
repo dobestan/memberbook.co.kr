@@ -22,3 +22,9 @@ a:hover {
 	color: #ffffff;
 	text-decoration: none;
 }
+
+a {
+	&:visited, &.active, &.focus {
+		text-decoration: none;	
+	}
+}

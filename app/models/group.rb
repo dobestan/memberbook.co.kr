@@ -6,6 +6,14 @@ class Group < ActiveRecord::Base
 	
 	scope :top_level, where(:parent_id => nil)
 
+  def ancestor
+    if self.level == 0
+      return self
+    else
+      self.parent.ancestor
+    end
+  end
+
 	def descendents
     children.map do |child|
       [child] + child.descendents

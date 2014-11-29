@@ -3,6 +3,8 @@ class CreateGroups < ActiveRecord::Migration
     create_table :groups do |t|
     	t.string :name
     	t.integer :point
+    	# level : 그룹의 등급 ( EMBA : 0 level, EMBA 의 건설경영 : 1 level )
+    	t.integer :level
     	t.integer :parent_id
 
       t.timestamps
