@@ -231,4 +231,60 @@ html, body {
 			}			
 		}
 	}
+
+	#settingsWrapper {
+		padding: 20px 100px 0;
+		color: #7D7D8E;
+
+		.row {
+			margin: 0;
+			padding: 20px 0;
+			border-bottom: 1px solid #E7E7EC;
+			
+			.key {
+				font-size: 1.5em;
+				height: 100%;
+			}
+
+			.value {
+				font-size: 1.1em;
+				color: black;
+				height: 100%;
+			}
+		}
+
+		#groupUl {
+			.ancestor {
+				.group {
+					font-size: 0.9em;
+					border-bottom: 1px solid #E7E7EC;
+					padding: 10px 0;
+					margin-left: 25px;		
+					display: none;
+				}
+
+				.ancestorContainer {
+					font-size: 1.2em;
+					cursor: pointer;
+
+					.arrow {
+						width: 1.1em;
+						height: 1.1em;
+						float: left;
+						position: relative;
+						top: 0.1em;
+						margin-right: 10px;
+						background-image: asset_url("dashboard/settings/down_arrow.jpg");
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center center;
+					}
+				}
+
+				&.show .arrow {
+					background-image: asset_url("dashboard/settings/up_arrow.jpg");
+				}
+			}
+		}
+	}
 }

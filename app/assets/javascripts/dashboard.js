@@ -64,3 +64,15 @@ $('#groupUl').click(function(e) {
 		}.bind(this)
 	});
 });
+
+$('#settingsWrapper .ancestorContainer').click(function(e) {
+	var ancestor = $(this).parent();
+	var groups = ancestor.find('.group');
+	if (ancestor.hasClass('show')) {
+		groups.fadeOut(300);
+		ancestor.toggleClass('show');
+	} else {
+		groups.fadeIn(300);
+		ancestor.toggleClass('show');
+	}
+});
