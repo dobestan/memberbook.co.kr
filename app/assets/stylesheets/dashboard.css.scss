@@ -235,6 +235,7 @@ html, body {
 	#settingsWrapper {
 		padding: 20px 100px 0;
 		color: #7D7D8E;
+		display: none;
 
 		.row {
 			margin: 0;
@@ -255,12 +256,46 @@ html, body {
 
 		#groupUl {
 			.ancestor {
-				.group {
-					font-size: 0.9em;
-					border-bottom: 1px solid #E7E7EC;
-					padding: 10px 0;
-					margin-left: 25px;		
+				margin-bottom: 30px;
+
+				.editBtn, .saveBtn {
+					font-size: 0.7em;
+					padding: 2px 5px;
+					float: right;
 					display: none;
+				}
+
+				.group, .addGroup {
+					font-size: 0.9em;
+					padding: 10px 0;
+					margin-left: 25px;
+					height: 40px;
+					display: none;
+
+					.minus, .plus {
+						transition: opacity 0.3s;
+						float: right;
+						width: 1em;
+						height: 100%;
+						background-image: asset_url("dashboard/settings/minus.png");
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center center;
+						cursor: pointer;
+						opacity: 0;
+					}
+
+					.plus {
+						background-image: asset_url("dashboard/settings/plus.png");
+					}
+				}
+
+				.addGroup {
+					height: 54px;
+
+					.addGroupForm {
+						height: 100%;
+					}
 				}
 
 				.ancestorContainer {
@@ -268,11 +303,11 @@ html, body {
 					cursor: pointer;
 
 					.arrow {
-						width: 1.1em;
-						height: 1.1em;
+						width: 0.9em;
+						height: 0.9em;
 						float: left;
 						position: relative;
-						top: 0.1em;
+						top: 0.3em;
 						margin-right: 10px;
 						background-image: asset_url("dashboard/settings/down_arrow.jpg");
 						background-size: contain;
@@ -281,8 +316,32 @@ html, body {
 					}
 				}
 
-				&.show .arrow {
-					background-image: asset_url("dashboard/settings/up_arrow.jpg");
+				&.show {
+					.arrow{
+						background-image: asset_url("dashboard/settings/up_arrow.jpg");	
+					}
+
+					.editBtn {
+						display: block;
+					}
+				}
+
+				&.edit {
+					.minus, .plus {
+						opacity: 1;
+					}
+
+					.editBtn {
+						display: none;
+					}
+
+					.saveBtn {
+						display: block;
+					}
+
+					.addGroup {
+						display: block;
+					}
 				}
 			}
 		}

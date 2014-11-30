@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   match '/dashboard', to: 'dashboard#index', via: :GET
   match '/dashboard/:group_code/:group_id/users', to: 'dashboard#users', via: :GET
+  match '/dashboard/:group_code/:group_id/groups', to: 'dashboard#createGroup', via: :POST
+  match '/dashboard/groups/:group_id', to: 'dashboard#destroyGroup', via: :DELETE
 
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'

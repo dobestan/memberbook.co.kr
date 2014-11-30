@@ -12,7 +12,7 @@ class DashboardController < ApplicationController
 		@users = @ancestor_groups.first.children.first.users
 	end
 
-	# GET /dashboard/{group_code}/{group_id}/users.json
+	# GET /dashboard/:group_code/:group_id/users.json
 	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
 	def users
@@ -21,6 +21,40 @@ class DashboardController < ApplicationController
 
 		respond_to do |format|
 			format.json { render json: @users }
+		end
+	end
+
+	# POST /dashboard/:group_code/:groud_id/groups
+	# 학교 ( group_code ) 에 해당 그룹 ( group_id ) 의 서브그룹으로 추가
+	def createGroup
+		@group = Group.create({
+			name: params[:name],
+			code: params[:group_code],
+			parent_id: params[:group_id],
+			level: params[:group_level].to_i + 1
+		});
+
+		respond_to do |format|
+			if @group.save
+				format.json { render json: @group }
+			else
+				format.json { render plain: "fail" }
+			end
+		end
+	end
+
+	# POST /dashboard/groups/:group_id
+	# group_id 에 해당 그룹 삭제
+	def destroyGroup
+		@group = Group.find(params[:group_id]);
+		@group.destroy
+
+		respond_to do |format|
+			if @group.destroyed?
+				format.json { render plain: "success" }
+			else
+				format.json { render plain: "fail" }
+			end
 		end
 	end
 end
