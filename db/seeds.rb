@@ -38,31 +38,37 @@ when "development"
 	emba_groups = Group.create([{
 			name: '성균관대 EBMA',
 			level: 0,
+			code: 0,
 			point: 50000
 		}, {
 			name: '건설경영',
 			point: 10000,
 			level: 1,
+			code: 0,
 			parent_id: 1
 		}, {
 			name: '건설사업관리',
 			point: 25000,
 			level: 1,
+			code: 0,
 			parent_id: 1
 		}, {
 			name: '건축공간환경디자인',
 			point: 5000,
 			level: 1,
+			code: 0,
 			parent_id: 1
 		}, {
 			name: '건축도시디자인',
 			point: 12000,
 			level: 1,
+			code: 0,
 			parent_id: 1
 		}, {
 			name: '그린빌딩시스템',
 			point: 18000,
 			level: 1,
+			code: 0,
 			parent_id: 1
 		}])
 
@@ -70,11 +76,13 @@ when "development"
 	art_groups = Group.create([{
 			name: '중앙대 예술대학원',
 			level: 0,
+			code: 1,
 			point: 50000
 		}, {
 			name: '산업디자인',
 			level: 1,
 			point: 20000,
+			code: 1,
 			parent_id: 7
 		}])
 

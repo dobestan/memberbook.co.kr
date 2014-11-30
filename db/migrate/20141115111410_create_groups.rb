@@ -5,6 +5,7 @@ class CreateGroups < ActiveRecord::Migration
     	t.integer :point
     	# level : 그룹의 등급 ( EMBA : 0 level, EMBA 의 건설경영 : 1 level )
     	t.integer :level
+      t.integer :code
     	t.integer :parent_id
 
       t.timestamps

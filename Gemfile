@@ -70,3 +70,6 @@ gem 'addressable'
 
 # 환경변수를 저장하기 위해서 필요
 gem 'figaro'
+
+# HTML 템플릿 라이브러리
+gem 'underscore-rails', '~> 1.7.0'

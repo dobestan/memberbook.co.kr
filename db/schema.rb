@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20141116093531) do
     t.string   "name"
     t.integer  "point"
     t.integer  "level"
+    t.integer  "code"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"

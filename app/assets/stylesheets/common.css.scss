@@ -24,7 +24,7 @@ a:hover {
 }
 
 a {
-	&:visited, &.active, &.focus {
-		text-decoration: none;	
+	&:visited, &:active, &:focus {
+		text-decoration: none;
 	}
 }

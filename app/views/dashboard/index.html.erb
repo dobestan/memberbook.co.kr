@@ -17,10 +17,11 @@
         <p id="groupsP">GROUPS</p>
         <ul id="groupUl">
           <% @ancestor_groups.each do |ancestor_group| %>
-            <li class="group ancestor"><div class="align"><%= ancestor_group.name %></div></li>
+            <ul class="group ancestor" data-id=<%= ancestor_group.id %>><div class="align"><%= ancestor_group.name %></div>
             <% ancestor_group.children.each do |group| %>
-              <li class="group"><div class="align"><%= group.name %></div></li>
+              <li class="group" data-id=<%= group.id %> data-code=<%= group.code %>><div class="align"><%= group.name %></div></li>
             <% end %>
+            </ul>
           <% end %>
         </ul>
       </div>
@@ -60,3 +61,19 @@
     </div>
   </div>
 </div>
+<script id="userTemplate" type="text/template">
+  <li class="col-sm-5 col-md-5 profile <%%= offsetClass %>">
+    <div class="front">
+      <div class="img"></div>
+      <p class="name"><%%= name %></p>
+      <p><%%= grade %></p>
+    </div>
+    <div class="back">
+      <div class="img"></div>
+      <p class="name"><%%= name %></p>
+      <p class="subInfo"><%%= phone_number %></p>
+      <p class="subInfo"><%%= email %></p>
+      <p class="subInfo"><%%= address %></p>
+    </div>
+  </li>
+</script>
