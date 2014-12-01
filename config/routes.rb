@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   match '/result', to: 'messages#result',via: :GET
   match '/email', to: 'messages#send_email',via: :GET
 
+  match '/dashboard', to: 'dashboard#index', via: :GET
+  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#users', via: :GET
+  match '/dashboard/:group_code/:group_id/groups', to: 'dashboard#createGroup', via: :POST
+  match '/dashboard/groups/:group_id', to: 'dashboard#destroyGroup', via: :DELETE
+
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
 
@@ -24,6 +29,11 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users
+
+  # Example subdomain routes
+  # constraints subdomain: 'dashboard' do
+  #   resources :photos
+  # end
 
   # Example resource route with options:
   #   resources :products do

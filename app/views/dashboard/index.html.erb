@@ -1,0 +1,125 @@
+<div id="bodyWrapper">
+  <div id="leftSidebar">
+    <div id="firstRow">
+      <div id="container">
+        <div id="logo"></div>
+        <p id="titleP">Dashboard</p>
+      </div>
+    </div>
+    <div id="secondRow">
+      <div id="container">
+        <div id="profileImg"></div>
+        <p id="emailP">hook3748@gmail.com</p>
+      </div>
+    </div>
+    <div id="thirdRow">
+      <div id="container">
+        <p id="groupsP">GROUPS</p>
+        <ul id="groupUl">
+          <% @ancestor_groups.each do |ancestor_group| %>
+            <ul class="group ancestor" data-id=<%= ancestor_group.id %>><div class="align"><%= ancestor_group.name %></div>
+            <% ancestor_group.children.each do |group| %>
+              <li class="group" data-id=<%= group.id %> data-code=<%= group.code %>><div class="align"><%= group.name %></div></li>
+            <% end %>
+            </ul>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="mainContent">
+    <div id="navBar">
+      <ul id="elementUl">
+        <li data-wrapper="usersWrapper" class="element active">
+          <a href="#"><i class="icon"></i>원우목록</a>
+        </li>
+        <li class="element">
+          <a href="#"><i class="icon"></i>그룹정보</a>
+        </li>
+        <li class="element">
+          <a href="#"><i class="icon"></i>공지사항</a>
+        </li>
+        <li data-wrapper="settingsWrapper" class="element">
+          <a href="#"><i class="icon"></i>설정</a>
+        </li>
+      </ul>
+    </div>
+    <div id="usersWrapper">
+      <p id="usersP">Users</p>
+      <ul id="profileUl"> 
+        <div class="row">
+          <% @users.each do |user| %>
+            <li class="col-sm-5 col-md-5 profile <%= cycle("", "col-sm-offset-1 col-md-offset-1") %>">
+              <div class="front">
+                <div class="img"></div>
+                <p class="name"><%= user.name %></p>
+                <p><%= user.grade %></p>
+              </div>
+              <div class="back">
+                <div class="img"></div>
+                <p class="name"><%= user.name %></p>
+                <p class="subInfo"><%= user.phone_number %></p>
+                <p class="subInfo"><%= user.email %></p>
+                <p class="subInfo"><%= user.address %></p>
+              </div>
+            </li>
+          <% end %>
+        </div>
+      </ul>
+    </div>
+    <div id="settingsWrapper">
+      <div class="row">
+        <div class="col-sm-3 col-md-3 key">그룹 관리</div>
+        <div class="col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1 value">
+          <ul id="groupUl">
+            <% @ancestor_groups.each do |ancestor_group| %>
+            <ul class="group ancestor" data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
+              <div class="ancestorContainer">
+                <div class="align"><%= ancestor_group.name %>
+                  <i class="arrow"></i>
+                  <button class="editBtn btn btn-default">Edit</button>
+                  <button class="saveBtn btn btn-primary">Save</button>
+                </div>
+              </div>
+              <% ancestor_group.children.each do |group| %>
+                <li class="group" data-level=<%= group.level %> data-id=<%= group.id %> data-code=<%= group.code %>>
+                  <%= group.name %><i class="minus"></i>
+                </li>
+              <% end %>
+              <li class="addGroup">
+                <form class="form-inline addGroupForm" role="form">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="그룹이름">
+                  </div>
+                  <i class="plus"></i>
+                </form>
+              </li>
+            </ul>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script id="userTemplate" type="text/template">
+  <li class="col-sm-5 col-md-5 profile <%%= offsetClass %>">
+    <div class="front">
+      <div class="img"></div>
+      <p class="name"><%%= name %></p>
+      <p><%%= grade %></p>
+    </div>
+    <div class="back">
+      <div class="img"></div>
+      <p class="name"><%%= name %></p>
+      <p class="subInfo"><%%= phone_number %></p>
+      <p class="subInfo"><%%= email %></p>
+      <p class="subInfo"><%%= address %></p>
+    </div>
+  </li>
+</script>
+<script id="groupTemplate" type="text/template">
+  <li class="group" data-level=<%%= level %> data-id=<%%= id %> data-code=<%%= code %>>
+    <%%= name %><i class="minus"></i>
+  </li>
+</script>

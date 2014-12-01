@@ -1,0 +1,349 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+	height: 100%;
+}
+
+#bodyWrapper {
+	height: 100%;
+}
+
+#leftSidebar {
+	position: absolute;
+	width: 260px;
+	height: 100%;
+	background-color: #42B84C;
+	box-shadow: 2px 0 10px;
+
+	#firstRow {
+		height: 55px;
+		background: rgba(255, 255, 255, 0.2);
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+		#container {
+			padding: 15px 25px;
+
+			#logo {
+				background-image: asset_url("dashboard/logo.png");
+				float: left;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				background-size: contain;
+				background-repeat: no-repeat;
+			}
+
+			#titleP {
+				color: white;
+				font-weight: 600;
+				line-height: 30px;
+			}
+		}
+	}
+
+	#secondRow {
+		height: 55px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+
+		#container {
+			padding: 15px 25px;
+
+			#profileImg {
+				float: left;
+				background-color: yellow;
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+
+			#emailP {
+				color: white;
+				font-weight: 200;
+				line-height: 30px;
+			}
+		}
+	}
+
+	#thirdRow {
+		#container {
+			padding: 15px 0;
+
+			#groupsP {
+				font-size: 0.8em;
+				color: rgba(255, 255, 255, 0.6);
+				font-weight: 100;
+				margin-left: 25px;
+			}
+
+			#groupUl {
+				color: white;
+				font-weight: 300;
+
+				.group {
+					text-indent: 40px;
+					cursor: pointer;
+
+					&.ancestor {
+						text-indent: 25px;
+						cursor: auto;
+					}
+
+					.align {
+						padding: 10px 0;
+					}
+
+					&.active {
+						background: rgba(255, 255, 255, 0.3);
+					}
+				}
+			}
+		}
+	}
+}
+
+#mainContent {
+	height: 100%;
+	float: right;
+	width: calc(100% - 260px);
+
+	#navBar {
+		margin-top: 30px;
+		box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+		#elementUl {
+			text-align: center;
+
+			.element {
+				display: inline-block;
+				padding: 10px 0 15px;
+				margin-right: 40px;
+				cursor: pointer;
+				a {
+					color: #7D7D8E;
+				}
+
+				.icon {
+					display: inline-block;
+					position: relative;
+					top: 8px;
+					width: 24px;
+					height: 24px;
+					margin-right: 10px;
+					background-size: cover;
+					background-position: center center;
+				}
+
+				&.active {
+					border-bottom: 2px solid rgb(86, 205, 252);
+
+					a {
+						color: rgb(86, 205, 252);	
+					}
+				}
+			}		
+		}
+
+		@for $i from 1 through 4 {
+	    .element:nth-child(#{$i}) {
+	    	.icon {
+	    		background-image: asset_url("dashboard/navbar/element#{$i}.png");	    		
+	    	}
+
+	    	&.active {
+	    		.icon {
+						background-image: asset_url("dashboard/navbar/element#{$i}_active.png");	    			
+	    		}
+	    	}
+	    }
+	  }
+	}
+
+	#usersWrapper {
+		padding: 20px 100px 0;
+		color: #7D7D8E;
+
+		#profileUl {
+			margin-top: 20px;
+
+			.row {
+				margin: 0;
+			}
+
+			.profile {
+				position: relative;
+				cursor: pointer;
+				transition: transform 0.6s;
+				transform-style: preserve-3d;
+				height: 150px;
+				margin-bottom: 30px;
+
+				&.backOn {
+					transform: rotateY(180deg);
+				}
+
+				.front, .back {
+					position: absolute;
+					backface-visibility: hidden;
+					left: 0;
+					top: 0;
+					width: 100%;
+				}
+
+				.img {
+					width: 150px;
+					height: 150px;
+					border-radius: 50%;
+					overflow: hidden;					
+					background-size: cover;
+				}
+
+				.front {
+					transform: rotateY(0deg);
+
+					.img {
+						float: left;
+						background-image: asset_url("dashboard/profiles/jehyeok.jpg");
+						margin-right: 20px;
+					}
+				}
+
+				.back {
+					transform: rotateY(180deg);
+
+					.img {
+						float: right;
+						background-image: asset_url("dashboard/profiles/suchan.png");
+						margin-left: 20px;
+					}
+				}					
+
+				.name {
+					font-size: 1.5em;
+					font-weight: 400;
+				}
+
+				.subInfo {
+					font-size: 0.9em;
+				}
+			}			
+		}
+	}
+
+	#settingsWrapper {
+		padding: 20px 100px 0;
+		color: #7D7D8E;
+		display: none;
+
+		.row {
+			margin: 0;
+			padding: 20px 0;
+			border-bottom: 1px solid #E7E7EC;
+			
+			.key {
+				font-size: 1.5em;
+				height: 100%;
+			}
+
+			.value {
+				font-size: 1.1em;
+				color: black;
+				height: 100%;
+			}
+		}
+
+		#groupUl {
+			.ancestor {
+				margin-bottom: 30px;
+
+				.editBtn, .saveBtn {
+					font-size: 0.7em;
+					padding: 2px 5px;
+					float: right;
+					display: none;
+				}
+
+				.group, .addGroup {
+					font-size: 0.9em;
+					padding: 10px 0;
+					margin-left: 25px;
+					height: 40px;
+					display: none;
+
+					.minus, .plus {
+						transition: opacity 0.3s;
+						float: right;
+						width: 1em;
+						height: 100%;
+						background-image: asset_url("dashboard/settings/minus.png");
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center center;
+						cursor: pointer;
+						opacity: 0;
+					}
+
+					.plus {
+						background-image: asset_url("dashboard/settings/plus.png");
+					}
+				}
+
+				.addGroup {
+					height: 54px;
+
+					.addGroupForm {
+						height: 100%;
+					}
+				}
+
+				.ancestorContainer {
+					font-size: 1.2em;
+					cursor: pointer;
+
+					.arrow {
+						width: 0.9em;
+						height: 0.9em;
+						float: left;
+						position: relative;
+						top: 0.3em;
+						margin-right: 10px;
+						background-image: asset_url("dashboard/settings/down_arrow.jpg");
+						background-size: contain;
+						background-repeat: no-repeat;
+						background-position: center center;
+					}
+				}
+
+				&.show {
+					.arrow{
+						background-image: asset_url("dashboard/settings/up_arrow.jpg");	
+					}
+
+					.editBtn {
+						display: block;
+					}
+				}
+
+				&.edit {
+					.minus, .plus {
+						opacity: 1;
+					}
+
+					.editBtn {
+						display: none;
+					}
+
+					.saveBtn {
+						display: block;
+					}
+
+					.addGroup {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}

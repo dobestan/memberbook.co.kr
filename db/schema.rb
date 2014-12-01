@@ -11,13 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141123161853) do
+ActiveRecord::Schema.define(version: 20141116093531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: true do |t|
     t.string   "name"
+    t.integer  "point"
+    t.integer  "level"
+    t.integer  "code"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,0 +1,30 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+	margin: 0;
+	font-family: 'Nanum Gothic'
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	color: #e6e6e6;
+}
+
+a:hover {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+a {
+	&:visited, &:active, &:focus {
+		text-decoration: none;
+	}
+}
