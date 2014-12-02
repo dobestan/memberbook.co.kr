@@ -357,18 +357,22 @@ html, body {
 			}
 
 			td {
-				font-size: 0.9em;
-
+				font-size: 0.8em;
+				padding: 8px 4px;
 				&.name, &.grade {
-					width: 5%;
+					width: 8%;
 				}
 
 				&.group {
-					width: 10%;
+					width: 15%;
 				}
 
 				&.phoneNumber {
-					width: 10%;
+					width: 15%;
+				}
+
+				&.email {
+					width: 20%;
 				}
 
 				&.address {
@@ -376,11 +380,11 @@ html, body {
 				}
 
 				&.birthday {
-					width: 8%;
+					width: 15%;
 				}
 
 				&.btns {
-					width: 5%;
+					/*width: 5%;*/
 					height: 37px;
 				}
 
@@ -421,6 +425,10 @@ html, body {
 					display: block;
 				}
 
+				.addUser {
+					display: none;
+				}
+
 				&.edit {
 					.saveBtn {
 						display: block;
@@ -433,10 +441,18 @@ html, body {
 					.minus {
 						opacity: 1;
 					}
+
+					.addUser {
+						display: table-row;
+					}
 				}
 
 				.theadTable {
 					margin-bottom: 0;
+
+					input {
+						padding: 0;
+					}
 				}	
 
 				.userTbodyWrapper {

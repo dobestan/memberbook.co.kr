@@ -82,6 +82,34 @@ class DashboardController < ApplicationController
 		end
 	end
 
+	# POST /dashboard/:group_code/:groud_id/groups
+	# 학교 ( group_code ) 에 해당 그룹 ( group_id ) 의 서브그룹으로 추가
+	def createUser
+		@user = User.create({
+			name: params[:name],
+			phone_number: params[:phone_number],
+			email: params[:email],
+			grade: params[:grade],
+			address: params[:address],
+			birthday: params[:birthday]
+		});
+
+		@group = Group.find(params[:group_id])
+		@group.users << @user
+
+		respond_to do |format|
+			if @user.save
+				format.json { render json: {
+						:user => @user,
+						:group => @group
+					}
+				}
+			else
+				format.json { render plain: "fail" }
+			end
+		end
+	end
+
 	# DELETE /dashboard/users/:user_id
 	# group_id 에 해당 그룹 삭제
 	def destroyUser

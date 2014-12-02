@@ -105,8 +105,8 @@
           <ul class="groupUl">
             <% @ancestor_groups.each do |ancestor_group| %>
             <div class="userTableWrapper">
-            <table class="table table-striped theadTable">
-              <caption data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
+            <table class="table table-striped theadTable" data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
+              <caption>
                 <%= ancestor_group.name %>
                 <button class="editBtn btn btn-default">Edit</button>
                 <button class="saveBtn btn btn-primary">Save</button>
@@ -116,9 +116,26 @@
                 <td class="grade">학년</td>
                 <td class="group">소속</td>
                 <td class="phoneNumber">연락처</td>
+                <td class="email">이메일</td>
                 <td class="address">주소</td>
                 <td class="birthday">생일</td>
                 <td class="btns"></td>
+              </tr>
+              <tr class="addUser">
+                <td class="name"><input type="text" class="form-control"></td>
+                <td class="grade"><input type="text" class="form-control"></td>
+                <td class="group">
+                  <select class="form-control">
+                    <% ancestor_group.descendents.each do |group| %>
+                      <option value="<%= group.id %>"><%= group.name %></option>
+                    <% end %>
+                  </select>
+                </td>
+                <td class="phoneNumber"><input type="text" class="form-control"></td>
+                <td class="address"><input type="text" class="form-control"></td>
+                <td class="email"><input type="text" class="form-control"></td>
+                <td class="birthday"><input type="text" class="form-control"></td>
+                <td class="btns"><i class="plus"></i></td>
               </tr>
             </table>
             <div class="userTbodyWrapper">
@@ -131,6 +148,7 @@
                       <td class="grade"><%= user.grade %></td>
                       <td class="group"><%= group.name %></td>
                       <td class="phoneNumber"><%= user.phone_number %></td>
+                      <td class="email"><%= user.email %></td>
                       <td class="address"><%= user.address %></td>
                       <td class="birthday"><%= user.birthday %></td>
                       <td class="btns"><i class="minus"></i></td>
@@ -168,4 +186,16 @@
   <li class="group" data-level=<%%= level %> data-id=<%%= id %> data-code=<%%= code %>>
     <%%= name %><i class="minus"></i>
   </li>
+</script>
+<script id="userTemplateInTable" type="text/template">
+  <tr data-id=<%%= id %>>
+    <td class="name"><%%= name %></td>
+    <td class="grade"><%%= grade %></td>
+    <td class="group"><%%= group %></td>
+    <td class="phoneNumber"><%%= phone_number %></td>
+    <td class="email"><%%= email %></td>
+    <td class="address"><%%= address %></td>
+    <td class="birthday"><%%= birthday %></td>
+    <td class="btns"><i class="minus"></i></td>
+  </tr>
 </script>

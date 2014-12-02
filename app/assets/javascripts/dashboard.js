@@ -92,7 +92,7 @@ $('#settingsWrapper .ancestorContainer').click(function(e) {
 	}
 });
 
-$('#settingsWrapper .plus').click(function(e) {
+$('#settingsWrapper .ancestor .plus').click(function(e) {
 	var ancestor = $(this).closest('.ancestor');
 	var groupLevel = ancestor.data('level');
 	var groupCode = ancestor.data('code');
@@ -156,8 +156,9 @@ $('.userTableWrapper .saveBtn').click(function(e) {
 	$(this).parents('.userTableWrapper').toggleClass('edit');
 })
 
-$('#settingsWrapper .userTbodyWrapper').click(function(e) {
+$('.userTableWrapper .userTbodyWrapper').click(function(e) {
 	var target = $(e.target);
+	
 	if (target.hasClass('minus')) {
 		var userId = target.parents('tr').data('id');
 
@@ -172,4 +173,56 @@ $('#settingsWrapper .userTbodyWrapper').click(function(e) {
 			}
 		});
 	}
+});
+
+$('.userTableWrapper .plus').click(function(e) {
+	var target = $(e.target);
+	var addUserRow = target.parents('tr');
+	var theadTable = target.parents('.theadTable');
+
+	// 그룹 정보
+	var groupCode = theadTable.data('code');
+	// 유저 정보
+	var name = addUserRow.find('.name input').val();
+	var grade = addUserRow.find('.grade input').val();
+	var groupId = addUserRow.find('.group select').val();
+	var phoneNumber = addUserRow.find('.phoneNumber input').val();
+	var email = addUserRow.find('.email input').val();
+	var address = addUserRow.find('.address input').val();
+	var birthday = addUserRow.find('.birthday input').val();
+	$.ajax({
+		type: 'POST',
+		url: '/dashboard/' + groupCode + '/' + groupId + '/users',
+		data: {
+			name: name,
+			grade: grade,
+			phone_number: phoneNumber,
+			email: email,
+			address: address,
+			birthday: birthday
+		},
+		success: function(data) {
+			debugger;
+			var userTemplateInTable = $('#userTemplateInTable');
+			userTemplateInTable = _.template(userTemplateInTable.text());
+
+			// 그룹 생성
+			var user = userTemplateInTable({
+				id: data.user.id,
+				name: data.user.name,
+				grade: data.user.grade,
+				group: data.group.name,
+				phone_number: data.user.phone_number,
+				email: data.user.email,
+				address: data.user.address,
+				birthday: data.user.birthday
+			});
+
+			// 돔 추가
+			$(user).appendTo(target.parents('.userTableWrapper').find('.userTbodyWrapper').find('tbody'));
+		},
+		error: function(msg) {
+			alert('유저추가를 실패했습니다');
+		}
+	});
 });
