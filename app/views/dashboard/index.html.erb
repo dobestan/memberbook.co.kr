@@ -104,10 +104,12 @@
         <div class="col-sm-12 col-md-12 value">
           <ul class="groupUl">
             <% @ancestor_groups.each do |ancestor_group| %>
+            <div class="userTableWrapper">
             <table class="table table-striped theadTable">
               <caption data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
                 <%= ancestor_group.name %>
                 <button class="editBtn btn btn-default">Edit</button>
+                <button class="saveBtn btn btn-primary">Save</button>
               </caption>
               <tr>
                 <td class="name">이름</td>
@@ -116,6 +118,7 @@
                 <td class="phoneNumber">연락처</td>
                 <td class="address">주소</td>
                 <td class="birthday">생일</td>
+                <td class="btns"></td>
               </tr>
             </table>
             <div class="userTbodyWrapper">
@@ -123,19 +126,21 @@
               <% ancestor_group.descendents_users.each do |user| %>
                 <% user.groups.each do |group| %>
                   <% if group.code == ancestor_group.code %>
-                    <tr>
+                    <tr data-id=<%= user.id %>>
                       <td class="name"><%= user.name %></td>
                       <td class="grade"><%= user.grade %></td>
                       <td class="group"><%= group.name %></td>
                       <td class="phoneNumber"><%= user.phone_number %></td>
                       <td class="address"><%= user.address %></td>
                       <td class="birthday"><%= user.birthday %></td>
+                      <td class="btns"><i class="minus"></i></td>
                     </tr>
                   <% end %>
                 <% end %>
               <% end %>
             </table>
             </div>            
+            </div>
             <% end %>
           </ul>
         </div>

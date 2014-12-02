@@ -43,7 +43,7 @@ class DashboardController < ApplicationController
 		end
 	end
 
-	# POST /dashboard/groups/:group_id
+	# DELETE /dashboard/groups/:group_id
 	# group_id 에 해당 그룹 삭제
 	def destroyGroup
 		@group = Group.find(params[:group_id]);
@@ -79,6 +79,21 @@ class DashboardController < ApplicationController
 		
 		respond_to do |format|
 			format.json { render json: @users }
+		end
+	end
+
+	# DELETE /dashboard/users/:user_id
+	# group_id 에 해당 그룹 삭제
+	def destroyUser
+		@user = User.find(params[:user_id]);
+		@user.destroy
+
+		respond_to do |format|
+			if @user.destroyed?
+				format.json { render plain: "success" }
+			else
+				format.json { render plain: "fail" }
+			end
 		end
 	end
 end

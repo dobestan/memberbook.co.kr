@@ -109,6 +109,7 @@ html, body {
 	height: 100%;
 	float: right;
 	width: calc(100% - 260px);
+	overflow-y: auto;
 
 	#navBar {
 		margin-top: 30px;
@@ -375,23 +376,74 @@ html, body {
 				}
 
 				&.birthday {
-					width: 10%;
+					width: 8%;
+				}
+
+				&.btns {
+					width: 5%;
+					height: 37px;
+				}
+
+				.minus, .plus {
+					transition: opacity 0.3s;
+					float: right;
+					width: 1em;
+					height: 100%;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center center;
+					cursor: pointer;
+					/*opacity: 0;*/
+				}
+
+				.minus {
+					background-image: asset_url("dashboard/settings/minus.png");
+				}
+				
+				.plus {
+					background-image: asset_url("dashboard/settings/plus.png");
 				}
 			}
 
-			.theadTable {
-				margin-bottom: 0;
-
+			.userTableWrapper {
 				.editBtn, .saveBtn {
 					padding: 2px 5px;
 					float: right;
+					display: none;
 				}
-			}	
 
-			.userTbodyWrapper {
-				max-height: 200px;
-				overflow-y: auto;
-				margin-bottom: 20px;
+				.minus {
+					transition: opacity 0.3s;
+					opacity: 0;
+				}
+				
+				.editBtn {
+					display: block;
+				}
+
+				&.edit {
+					.saveBtn {
+						display: block;
+					}
+
+					.editBtn {
+						display: none;
+					}
+
+					.minus {
+						opacity: 1;
+					}
+				}
+
+				.theadTable {
+					margin-bottom: 0;
+				}	
+
+				.userTbodyWrapper {
+					max-height: 200px;
+					overflow-y: auto;
+					margin-bottom: 20px;
+				}
 			}
 		}
 	}

@@ -23,7 +23,7 @@ $('#navBar #elementUl').click(function(e) {
 // 첫번째 그룹 포커싱 초기화
 $('.group').eq(1).addClass('active');
 
-$('.groupUl').click(function(e) {
+$('#leftSideBar #thirdRow .groupUl').click(function(e) {
 	// li 요소 검색
 	target = $(e.target).closest('li');
 	// li 가 아니라면 리턴
@@ -129,21 +129,47 @@ $('#settingsWrapper .plus').click(function(e) {
 	});
 });
 
-$('#settingsWrapper .groupUl').click(function(e) {
+$('#settingsWrapper .ancestor').click(function(e) {
 	var target = $(e.target);
 	// minus 버튼이 아니라면
-	if (!target.hasClass('minus')) return;
+	if (target.hasClass('minus')) {
+		var groupId = target.parent().data('id');
 
-	var groupId = target.parent().data('id');
+		$.ajax({
+			type: 'DELETE',
+			url: '/dashboard/groups/' + groupId,
+			success: function(data) {
+				target.parent().remove();
+			},
+			error: function(msg) {
+				alert('그룹삭제를 실패했습니다');
+			}
+		});
+	}
+});
 
-	$.ajax({
-		type: 'DELETE',
-		url: '/dashboard/groups/' + groupId,
-		success: function(data) {
-			target.parent().remove();
-		},
-		error: function(msg) {
-			alert('그룹삭제를 실패했습니다');
-		}
-	});
+$('.userTableWrapper .editBtn').click(function(e) {
+	$(this).parents('.userTableWrapper').toggleClass('edit');
+});
+
+$('.userTableWrapper .saveBtn').click(function(e) {
+	$(this).parents('.userTableWrapper').toggleClass('edit');
+})
+
+$('#settingsWrapper .userTbodyWrapper').click(function(e) {
+	var target = $(e.target);
+	if (target.hasClass('minus')) {
+		var userId = target.parents('tr').data('id');
+
+		$.ajax({
+			type: 'DELETE',
+			url: '/dashboard/users/' + userId,
+			success: function(data) {
+				target.parents('tr').remove();
+			},
+			error: function(msg) {
+				alert('그룹삭제를 실패했습니다');
+			}
+		});
+	}
 });
