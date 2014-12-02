@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   match '/email', to: 'messages#send_email',via: :GET
 
   match '/dashboard', to: 'dashboard#index', via: :GET
-  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#users', via: :GET
+  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#group_users', via: :GET
   match '/dashboard/:group_code/:group_id/groups', to: 'dashboard#createGroup', via: :POST
   match '/dashboard/groups/:group_id', to: 'dashboard#destroyGroup', via: :DELETE
+  match '/dashboard/groups/:group_id', to: 'dashboard#updateGroup', via: :PUT
 
+  match '/dashboard/:group_code/users', to: 'dashboard#users', via: :GET 
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
 

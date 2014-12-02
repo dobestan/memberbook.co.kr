@@ -79,7 +79,7 @@ html, body {
 				margin-left: 25px;
 			}
 
-			#groupUl {
+			.groupUl {
 				color: white;
 				font-weight: 300;
 
@@ -121,6 +121,15 @@ html, body {
 				padding: 10px 0 15px;
 				margin-right: 40px;
 				cursor: pointer;
+
+				&.active {
+					border-bottom: 2px solid rgb(86, 205, 252);
+
+					a {
+						color: rgb(86, 205, 252);	
+					}
+				}
+
 				a {
 					color: #7D7D8E;
 				}
@@ -134,14 +143,6 @@ html, body {
 					margin-right: 10px;
 					background-size: cover;
 					background-position: center center;
-				}
-
-				&.active {
-					border-bottom: 2px solid rgb(86, 205, 252);
-
-					a {
-						color: rgb(86, 205, 252);	
-					}
 				}
 			}		
 		}
@@ -244,6 +245,7 @@ html, body {
 			
 			.key {
 				font-size: 1.5em;
+				margin-bottom: 10px;
 				height: 100%;
 			}
 
@@ -254,7 +256,7 @@ html, body {
 			}
 		}
 
-		#groupUl {
+		.groupUl {
 			.ancestor {
 				margin-bottom: 30px;
 
@@ -277,7 +279,6 @@ html, body {
 						float: right;
 						width: 1em;
 						height: 100%;
-						background-image: asset_url("dashboard/settings/minus.png");
 						background-size: contain;
 						background-repeat: no-repeat;
 						background-position: center center;
@@ -285,6 +286,10 @@ html, body {
 						opacity: 0;
 					}
 
+					.minus {
+						background-image: asset_url("dashboard/settings/minus.png");
+					}
+					
 					.plus {
 						background-image: asset_url("dashboard/settings/plus.png");
 					}
@@ -343,6 +348,41 @@ html, body {
 						display: block;
 					}
 				}
+			}
+
+
+			td {
+				font-size: 0.9em;
+
+				&.name, &.grade {
+					width: 5%;
+				}
+
+				&.group {
+					width: 10%;
+				}
+
+				&.phoneNumber {
+					width: 10%;
+				}
+
+				&.address {
+					width: 20%;
+				}
+
+				&.birthday {
+					width: 10%;
+				}
+			}
+
+			.theadTable {
+				margin-bottom: 0;
+			}	
+
+			.userTbodyWrapper {
+				max-height: 200px;
+				overflow-y: auto;
+				margin-bottom: 20px;
 			}
 		}
 	}

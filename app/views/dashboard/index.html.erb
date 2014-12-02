@@ -15,7 +15,7 @@
     <div id="thirdRow">
       <div id="container">
         <p id="groupsP">GROUPS</p>
-        <ul id="groupUl">
+        <ul class="groupUl">
           <% @ancestor_groups.each do |ancestor_group| %>
             <ul class="group ancestor" data-id=<%= ancestor_group.id %>><div class="align"><%= ancestor_group.name %></div>
             <% ancestor_group.children.each do |group| %>
@@ -44,7 +44,7 @@
         </li>
       </ul>
     </div>
-    <div id="usersWrapper">
+    <div id="usersWrapper" style="display:none;">
       <p id="usersP">Users</p>
       <ul id="profileUl"> 
         <div class="row">
@@ -67,11 +67,11 @@
         </div>
       </ul>
     </div>
-    <div id="settingsWrapper">
+    <div id="settingsWrapper" style="display:block;">
       <div class="row">
         <div class="col-sm-3 col-md-3 key">그룹 관리</div>
         <div class="col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1 value">
-          <ul id="groupUl">
+          <ul class="groupUl">
             <% @ancestor_groups.each do |ancestor_group| %>
             <ul class="group ancestor" data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
               <div class="ancestorContainer">
@@ -95,6 +95,44 @@
                 </form>
               </li>
             </ul>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 key">유저 관리</div>
+        <div class="col-sm-12 col-md-12 value">
+          <ul class="groupUl">
+            <% @ancestor_groups.each do |ancestor_group| %>
+            <table class="table table-striped theadTable">
+              <caption data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
+                <%= ancestor_group.name %>
+              </caption>
+              <tr>
+                <td class="name">이름</td>
+                <td class="grade">학년</td>
+                <td class="group">소속</td>
+                <td class="phoneNumber">연락처</td>
+                <td class="address">주소</td>
+                <td class="birthday">생일</td>
+              </tr>
+            </table>
+            <div class="userTbodyWrapper">
+            <table class="table table-hover">
+              <% ancestor_group.descendents.each do |group| %>
+                <% group.users.each do |user| %>
+                  <tr>
+                    <td class="name"><%= user.name %></td>
+                    <td class="grade"><%= user.grade %></td>
+                    <td class="group"><%= group.name %></td>
+                    <td class="phoneNumber"><%= user.phone_number %></td>
+                    <td class="address"><%= user.address %></td>
+                    <td class="birthday"><%= user.birthday %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+            </div>            
             <% end %>
           </ul>
         </div>

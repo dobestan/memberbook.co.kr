@@ -41,4 +41,20 @@ class GroupTest < ActiveSupport::TestCase
 
     assert_equal 3, groups.first.users.size
   end
+
+  test "update group" do
+    group = Group.find(2);
+    group.update({name: "건설경제"})
+    # 이름이 잘 변경되었는가?
+    assert_equal "건설경제", group.name
+    # 다른 칼럼값은 유지되는가?
+    assert_equal 20000, group.point
+  end
+
+  test "get all users using group_code" do
+    group = Group.find(2)
+    group.users << User.all
+    ancestor_group = group.ancestor
+    assert_equal 2, ancestor_group.descendents_users.size
+  end
 end

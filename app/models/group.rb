@@ -23,4 +23,10 @@ class Group < ActiveRecord::Base
   def self_and_descendents
     [self] + descendents
   end
+
+  def descendents_users
+    children.map do |child|
+      [child.users] + child.descendents_users
+    end.flatten
+  end
 end

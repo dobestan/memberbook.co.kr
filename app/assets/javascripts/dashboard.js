@@ -23,7 +23,7 @@ $('#navBar #elementUl').click(function(e) {
 // 첫번째 그룹 포커싱 초기화
 $('.group').eq(1).addClass('active');
 
-$('#groupUl').click(function(e) {
+$('.groupUl').click(function(e) {
 	// li 요소 검색
 	target = $(e.target).closest('li');
 	// li 가 아니라면 리턴
@@ -108,9 +108,11 @@ $('#settingsWrapper .plus').click(function(e) {
 			group_level: groupLevel
 		},
 		success: function(data) {
+			// 그룹 탬플릿 생성
 			var groupTemplate = $('#groupTemplate');
 			groupTemplate = _.template(groupTemplate.text());
 
+			// 그룹 생성
 			var group = groupTemplate({
 				level: data.level,
 				id: data.id,
@@ -118,15 +120,16 @@ $('#settingsWrapper .plus').click(function(e) {
 				name: data.name
 			});
 
+			// 돔 추가
 			$(group).insertAfter(ancestor.find('.group').last());
 		},
 		error: function(msg) {
-			debugger;
+			alert('그룹추가를 실패했습니다');
 		}
 	});
 });
 
-$('#settingsWrapper #groupUl').click(function(e) {
+$('#settingsWrapper .groupUl').click(function(e) {
 	var target = $(e.target);
 	// minus 버튼이 아니라면
 	if (!target.hasClass('minus')) return;
@@ -140,7 +143,7 @@ $('#settingsWrapper #groupUl').click(function(e) {
 			target.parent().remove();
 		},
 		error: function(msg) {
-			debugger;
+			alert('그룹삭제를 실패했습니다');
 		}
 	});
 });

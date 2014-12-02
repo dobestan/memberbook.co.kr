@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
 	# GET /dashboard/:group_code/:group_id/users.json
 	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
-	def users
+	def group_users
 		@group = Group.find(params[:group_id])
 		@users = @group.users
 
@@ -55,6 +55,30 @@ class DashboardController < ApplicationController
 			else
 				format.json { render plain: "fail" }
 			end
+		end
+	end
+
+	# PUT /dashboard/groups/:group_id
+	# group_id 에 해당 그룹 수정
+	def updateGroup
+		@group = Group.find(params[:group_id])
+
+		respond_to do |format|
+			if @group.update({name: params[:group_name]})
+				format.json { render json: @group }
+			else
+				format.json { render plain: "fail" }
+			end
+		end
+	end
+
+	# GET /dashboard/:group_id/users
+	def users
+		@group = Group.find_by! code: params[:group_code]
+		@users = @group.descendents_users
+		
+		respond_to do |format|
+			format.json { render json: @users }
 		end
 	end
 end
