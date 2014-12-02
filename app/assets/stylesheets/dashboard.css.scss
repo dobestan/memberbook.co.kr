@@ -351,6 +351,10 @@ html, body {
 			}
 
 
+			caption {
+				position: relative;
+			}
+
 			td {
 				font-size: 0.9em;
 
@@ -377,6 +381,11 @@ html, body {
 
 			.theadTable {
 				margin-bottom: 0;
+
+				.editBtn, .saveBtn {
+					padding: 2px 5px;
+					float: right;
+				}
 			}	
 
 			.userTbodyWrapper {

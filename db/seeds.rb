@@ -259,9 +259,6 @@ when "development"
 	# 유저 현제혁은 'EMBA의 건설 경영' 과 '중앙대 예술대학교의 산업디자인' 총 2개 그룹에 속함
 	emba_groups[1].users << emba_users
 
-	# 안수찬은 EMBA 건설사업관리에 속함
-	emba_groups[2].users << emba_users[1]
-
 	art_groups[1].users << emba_users[0]
 	art_groups[1].users << art_users
 when "production"

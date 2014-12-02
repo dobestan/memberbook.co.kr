@@ -107,6 +107,7 @@
             <table class="table table-striped theadTable">
               <caption data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
                 <%= ancestor_group.name %>
+                <button class="editBtn btn btn-default">Edit</button>
               </caption>
               <tr>
                 <td class="name">이름</td>
@@ -119,16 +120,18 @@
             </table>
             <div class="userTbodyWrapper">
             <table class="table table-hover">
-              <% ancestor_group.descendents.each do |group| %>
-                <% group.users.each do |user| %>
-                  <tr>
-                    <td class="name"><%= user.name %></td>
-                    <td class="grade"><%= user.grade %></td>
-                    <td class="group"><%= group.name %></td>
-                    <td class="phoneNumber"><%= user.phone_number %></td>
-                    <td class="address"><%= user.address %></td>
-                    <td class="birthday"><%= user.birthday %></td>
-                  </tr>
+              <% ancestor_group.descendents_users.each do |user| %>
+                <% user.groups.each do |group| %>
+                  <% if group.code == ancestor_group.code %>
+                    <tr>
+                      <td class="name"><%= user.name %></td>
+                      <td class="grade"><%= user.grade %></td>
+                      <td class="group"><%= group.name %></td>
+                      <td class="phoneNumber"><%= user.phone_number %></td>
+                      <td class="address"><%= user.address %></td>
+                      <td class="birthday"><%= user.birthday %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
             </table>
