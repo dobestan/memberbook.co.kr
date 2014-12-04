@@ -17,13 +17,13 @@ $('#navBar #elementUl').click(function(e) {
 	// 메인 컨텐츠 변경
 	$('#' + preFocusedElement.data('wrapper')).fadeOut(300, function() {
 		$('#' + target.data('wrapper')).fadeIn(300);
-	})
+	});
 });
 
 // 첫번째 그룹 포커싱 초기화
-$('.group').eq(1).addClass('active');
+$('.group').eq(1).addClass('active'); // hi
 
-$('#leftSideBar #thirdRow .groupUl').click(function(e) {
+$('#leftSideBar #thirdRow .groupUl').click(function(e) { // gunyoung park
 	// li 요소 검색
 	target = $(e.target).closest('li');
 	// li 가 아니라면 리턴
@@ -202,7 +202,6 @@ $('.userTableWrapper .plus').click(function(e) {
 			birthday: birthday
 		},
 		success: function(data) {
-			debugger;
 			var userTemplateInTable = $('#userTemplateInTable');
 			userTemplateInTable = _.template(userTemplateInTable.text());
 
@@ -225,4 +224,32 @@ $('.userTableWrapper .plus').click(function(e) {
 			alert('유저추가를 실패했습니다');
 		}
 	});
+});
+
+$('#boardForm').ckeditor();
+
+$('#boardListRow #writeBtn').click(function(e) {
+	var activeRow = $('#boardWrapper .row.active');
+	var willBeActiveRow = $('#boardWrapper #writeBoardRow');
+
+	activeRow.fadeOut(300, function() {
+		$(this).toggleClass('active');
+		willBeActiveRow.toggleClass('active');
+		willBeActiveRow.fadeIn(300);
+	});
+});
+
+$('#writeBoardRow .listBtn').click(function() {
+	var activeRow = $('#boardWrapper .row.active');
+	var willBeActiveRow = $('#boardWrapper #boardListRow');
+
+	activeRow.fadeOut(300, function() {
+		$(this).toggleClass('active');
+		willBeActiveRow.toggleClass('active');
+		willBeActiveRow.fadeIn(300);
+	});
+});
+
+$('#writeBoardRow .saveBtn').click(function() {
+
 });

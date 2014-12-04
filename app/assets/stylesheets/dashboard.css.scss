@@ -110,6 +110,7 @@ html, body {
 	float: right;
 	width: calc(100% - 260px);
 	overflow-y: auto;
+	transition: opacity 0.3s;
 
 	#navBar {
 		margin-top: 30px;
@@ -122,6 +123,10 @@ html, body {
 				padding: 10px 0 15px;
 				margin-right: 40px;
 				cursor: pointer;
+
+				span {
+					display: initial;
+				}
 
 				&.active {
 					border-bottom: 2px solid rgb(86, 205, 252);
@@ -163,10 +168,12 @@ html, body {
 	  }
 	}
 
-	#usersWrapper {
+	.wrapper {
 		padding: 20px 100px 0;
 		color: #7D7D8E;
+	}
 
+	#usersWrapper {
 		#profileUl {
 			margin-top: 20px;
 
@@ -234,9 +241,64 @@ html, body {
 		}
 	}
 
+	#groupInfoWrapper {
+	}
+
+	#boardWrapper {
+		.row {
+			margin: 0;
+			padding: 20px 0;
+			
+			.key {
+				font-size: 1.5em;
+				margin-bottom: 10px;
+				height: 100%;
+			}
+
+			.value {
+				font-size: 1.1em;
+				color: black;
+				height: 100%;
+			}
+		}
+
+		#boardListRow {
+			#boardPageNumWrapper {
+				text-align: center;
+				#boardPageNumUl {
+					margin: 0;
+
+					.boardPageNum {
+						display: inline-block;
+					}
+				}
+
+				#writeBtn {
+					float: right;
+					font-size: 0.7em;
+				}
+			}	
+		}
+
+		#writeBoardRow {
+			display: none;
+
+			input {
+				box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 3px 0px;
+				border: 1px solid rgb(182, 182, 182);
+				width: 100%;
+				padding: 8px;
+				margin-bottom: 10px;
+			}
+
+			.btns {
+				margin-top: 10px;
+				text-align: right;
+			}
+		}
+	}
+
 	#settingsWrapper {
-		padding: 20px 100px 0;
-		color: #7D7D8E;
 		display: none;
 
 		.row {
