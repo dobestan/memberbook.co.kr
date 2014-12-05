@@ -279,8 +279,6 @@ var BoardManager = {
 		var activeRow = $('#boardsWrapper .row.active');
 		var willBeActiveRow = $('#' + target.data('row'));
 
-		debugger;
-
 		if (target.is('.btn')) {
 			activeRow.fadeOut(300, function() {
 				$(this).toggleClass('active');
@@ -288,6 +286,20 @@ var BoardManager = {
 				willBeActiveRow.fadeIn(300);
 			});
 		}
+	},
+	reloadList: function(data) {
+		var activeRow = this.wrapper.find('.row.active');
+		activeRow.fadeOut(300, function() {
+			activeRow.toggleClass('active');
+			// 기존 리스트 삭제
+			this.boardListRow.remove();
+			this.wrapper.hide();
+			// 새로 rendering 한 partial 추가
+			$('#boardsWrapper').append(data);
+			this.boardListRow = this.wrapper.find('#boardListRow');
+			this.addBoardListRowEvent();
+			this.wrapper.fadeIn(300);
+		}.bind(this));
 	},
 	add: function(e) {
 		var selectedGorupCode = LoggedUser.groupCode;
@@ -308,26 +320,52 @@ var BoardManager = {
 			success: function(data) {
 				this.form[0].reset();
 				this.editor.setData('');
-				this.writeBoardRow.fadeOut(300, function() {
-					this.boardListRow.remove();
-					this.writeBoardRow.toggleClass('active');
-					$('#boardsWrapper').append(data);
-					this.boardListRow = this.wrapper.find('#boardListRow');
-					this.wrapper.fadeIn(300);
-					this.wrapper.find('.writeBtn').click(this.changeRow);
-				}.bind(this));
+				this.reloadList(data);
 			}.bind(this),
 			error: function() {
 				alert('글쓰기를 실패했습니다');
 			}
 		});
 	},
+	changePage: function(e) {
+		target = $(e.target);
+
+		if (target[0].tagName !== 'A') return;
+		
+		var val = target.text();
+		// 숫자를 눌렀다면
+		if ($.isNumeric(val)) {
+			var groupCode = LoggedUser.groupCode;
+			$.ajax({
+				type: 'GET',
+				url: '/' + groupCode + '/boards',
+				dataType: 'text',
+				data: {
+					page_num: val
+				},
+				success: function(data) {
+					this.reloadList(data);
+				}.bind(this),
+				error: function(msg) {
+					debugger;
+				}
+			});	
+		// 화살표를 눌렀다면
+		} else {
+			debugger;
+		}
+	},
+	addBoardListRowEvent: function() {
+		this.wrapper.find('.writeBtn').click(this.changeRow);
+		this.wrapper.find('#boardPageNumUl').click(this.changePage.bind(this));
+	},
 	init: function() {
 		this.form.find('textarea').ckeditor();
 		this.editor = CKEDITOR.instances.editor1;
-		this.wrapper.find('.writeBtn').click(this.changeRow);
+		this.addBoardListRowEvent();
 		this.wrapper.find('.listBtn').click(this.changeRow);
 		this.wrapper.find('.saveBtn').click(this.add.bind(this));
+
 	}
 };
 

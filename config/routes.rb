@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   # Board routes
   match '/:group_code/boards', to: 'board#create', via: :POST
+  match '/:group_code/boards', to: 'board#boards', via: :GET
 
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'

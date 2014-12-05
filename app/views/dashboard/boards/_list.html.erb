@@ -5,31 +5,28 @@
       <caption></caption>
       <thead>
         <tr>
-          <td>글번호</td>
-          <td>글제목</td>
-          <td>작성자</td>
-          <td>조회수</td>
+          <td class="number">글번호</td>
+          <td class="title">제목</td>
+          <td class="writer">작성자</td>
+          <td class="count">조회수</td>
         </tr>
       </thead>
       <tbody>
-        <% @ancestor_groups.each do |ancestor_group| %>
-          <% ancestor_group.boards.each.with_index(1) do |board, idx| %>
-            <tr>
-              <td><%= idx %></td>
-              <td><%= board.title %></td>
-              <td><%= board.writer %></td>
-              <td><%= board.count %></td>
-            </tr>
-          <% end %>
+        <% @boards.each do |board| %>
+          <tr>
+            <td class="number"><%= board.id %></td>
+            <td class="title"><%= board.title %></td>
+            <td class="writer"><%= board.writer %></td>
+            <td class="count"><%= board.count %></td>
+          </tr>
         <% end %>
       </tbody>
     </table>
     <div id="boardPageNumWrapper">
       <ul id="boardPageNumUl" class="pagination pagination-sm">
         <li class="boardPageNum"><a href="#">«</a></li>
-        <li class="boardPageNum active"><a href="#">1</a></li>
-        <% (2..3).each do |i| %>  
-          <li class="boardPageNum"><a href="#"><%= i %></a></li>
+        <% @page_nums.each do |page_num| %>
+          <li class="boardPageNum <%=raw "active" if page_num == @active_page_num %>"><a href="#"><%= page_num %></a></li>
         <% end %>
         <li class="boardPageNum"><a href="#">»</a></li>
       </ul>
