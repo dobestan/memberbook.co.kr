@@ -1,3 +1,7 @@
+var LoggedUser = {
+	userId: $('#userIdInput')
+};
+
 var LeftSidebar = {
 	groupUl: $('#leftSidebar .groupUl'),
 	selectAnotherGroup: function(e) {
@@ -9,7 +13,7 @@ var LeftSidebar = {
 
 		$.ajax({
 			type: 'GET',
-			url: '/dashboard/' + groupCode + '/' + groupId + '/users',
+			url: '/' + groupCode + '/' + groupId + '/users',
 			success: function(data) {
 				var userTemplate = $('#userTemplate');
 				userTemplate = _.template(userTemplate.text());
@@ -129,7 +133,7 @@ var Setting = {
 
 		$.ajax({
 			type: 'POST',
-			url: '/dashboard/' + groupCode + '/' + groupId + '/groups',
+			url: '/' + groupCode + '/' + groupId + '/groups',
 			data: {
 				name: name,
 				group_level: groupLevel
@@ -157,19 +161,20 @@ var Setting = {
 	},
 	deleteGroup: function(e) {
 		var target = $(e.target);
-		// minus 버튼이 아니라면
-		var groupId = target.parent().data('id');
+		if (target.is('.minus')) {
+			var groupId = target.parent().data('id');
 
-		$.ajax({
-			type: 'DELETE',
-			url: '/dashboard/groups/' + groupId,
-			success: function(data) {
-				target.parent().remove();
-			},
-			error: function(msg) {
-				alert('그룹삭제를 실패했습니다');
-			}
-		});
+			$.ajax({
+				type: 'DELETE',
+				url: '/groups/' + groupId,
+				success: function(data) {
+					target.parent().remove();
+				},
+				error: function(msg) {
+					alert('그룹삭제를 실패했습니다');
+				}
+			});
+		}
 	},
 	activateTableUserEdit: function(e) {
 		if ($(e.target).is('.btn')) {
@@ -179,7 +184,7 @@ var Setting = {
 	init: function() {
 		this.wrapper.find('.ancestorContainer').click(this.activateGroupEdit);
 		this.wrapper.find('.ancestor .plus').click(this.addGroup);
-		this.wrapper.find('.ancestor .minus').click(this.deleteGroup);
+		this.wrapper.find('.ancestor').click(this.deleteGroup);
 		this.userTableWrapper.find('.btns').click(this.activateTableUserEdit);
 	}
 };
@@ -194,12 +199,12 @@ $('.userTableWrapper .userTbodyWrapper').click(function(e) {
 
 		$.ajax({
 			type: 'DELETE',
-			url: '/dashboard/users/' + userId,
+			url: '/users/' + userId,
 			success: function(data) {
 				target.parents('tr').remove();
 			},
 			error: function(msg) {
-				alert('그룹삭제를 실패했습니다');
+				alert('유저삭제를 실패했습니다');
 			}
 		});
 	}
@@ -222,7 +227,7 @@ $('.userTableWrapper .plus').click(function(e) {
 	var birthday = addUserRow.find('.birthday input').val();
 	$.ajax({
 		type: 'POST',
-		url: '/dashboard/' + groupCode + '/' + groupId + '/users',
+		url: '/' + groupCode + '/' + groupId + '/users',
 		data: {
 			name: name,
 			grade: grade,

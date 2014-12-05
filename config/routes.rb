@@ -13,14 +13,17 @@ Rails.application.routes.draw do
   match '/email', to: 'messages#send_email',via: :GET
 
   match '/dashboard', to: 'dashboard#index', via: :GET
-  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#group_users', via: :GET
-  match '/dashboard/:group_code/:group_id/groups', to: 'dashboard#createGroup', via: :POST
-  match '/dashboard/groups/:group_id', to: 'dashboard#destroyGroup', via: :DELETE
-  match '/dashboard/groups/:group_id', to: 'dashboard#updateGroup', via: :PUT
 
-  match '/dashboard/:group_code/users', to: 'dashboard#users', via: :GET
-  match '/dashboard/:group_code/:group_id/users', to: 'dashboard#createUser', via: :POST
-  match '/dashboard/users/:user_id', to: 'dashboard#destroyUser', via: :DELETE
+  # Group routes
+  match '/:group_code/:group_id/users', to: 'group#users', via: :GET
+  match '/:group_code/:group_id/groups', to: 'group#create', via: :POST
+  match '/groups/:group_id', to: 'group#destroy', via: :DELETE
+  match '/groups/:group_id', to: 'group#update', via: :PUT
+
+  # User routes
+  match '/:group_code/users', to: 'user#users', via: :GET
+  match '/:group_code/:group_id/users', to: 'user#create', via: :POST
+  match '/users/:user_id', to: 'user#destroy', via: :DELETE
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
 

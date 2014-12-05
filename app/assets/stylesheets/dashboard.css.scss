@@ -388,6 +388,10 @@ html, body {
 				}
 
 				&.show {
+					.group {
+						display: list-item;
+					}
+
 					.arrow{
 						background-image: asset_url("dashboard/settings/up_arrow.jpg");	
 					}
