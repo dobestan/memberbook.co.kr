@@ -1,0 +1,53 @@
+#boardsWrapper {
+	.row {
+		margin: 0;
+		padding: 20px 0;
+		
+		.key {
+			font-size: 1.5em;
+			margin-bottom: 10px;
+			height: 100%;
+		}
+
+		.value {
+			font-size: 1.1em;
+			color: black;
+			height: 100%;
+		}
+	}
+
+	#boardListRow {
+		#boardPageNumWrapper {
+			text-align: center;
+			#boardPageNumUl {
+				margin: 0;
+
+				.boardPageNum {
+					display: inline-block;
+				}
+			}
+
+			#writeBtn {
+				float: right;
+				font-size: 0.7em;
+			}
+		}	
+	}
+
+	#writeBoardRow {
+		display: none;
+
+		input {
+			box-shadow: rgba(0, 0, 0, 0.14902) 0px 0px 3px 0px;
+			border: 1px solid rgb(182, 182, 182);
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 10px;
+		}
+
+		.btns {
+			margin-top: 10px;
+			text-align: right;
+		}
+	}
+}

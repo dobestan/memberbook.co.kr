@@ -1,0 +1,69 @@
+#usersWrapper {
+	display: block;
+	
+	#profileUl {
+		margin-top: 20px;
+
+		.row {
+			margin: 0;
+		}
+
+		.profile {
+			position: relative;
+			cursor: pointer;
+			transition: transform 0.6s;
+			transform-style: preserve-3d;
+			height: 150px;
+			margin-bottom: 30px;
+
+			&.backOn {
+				transform: rotateY(180deg);
+			}
+
+			.front, .back {
+				position: absolute;
+				backface-visibility: hidden;
+				left: 0;
+				top: 0;
+				width: 100%;
+			}
+
+			.img {
+				width: 150px;
+				height: 150px;
+				border-radius: 50%;
+				overflow: hidden;					
+				background-size: cover;
+			}
+
+			.front {
+				transform: rotateY(0deg);
+
+				.img {
+					float: left;
+					background-image: asset_url("dashboard/profiles/jehyeok.jpg");
+					margin-right: 20px;
+				}
+			}
+
+			.back {
+				transform: rotateY(180deg);
+
+				.img {
+					float: right;
+					background-image: asset_url("dashboard/profiles/suchan.png");
+					margin-left: 20px;
+				}
+			}					
+
+			.name {
+				font-size: 1.5em;
+				font-weight: 400;
+			}
+
+			.subInfo {
+				font-size: 0.9em;
+			}
+		}			
+	}
+}

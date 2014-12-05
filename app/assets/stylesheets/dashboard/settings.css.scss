@@ -1,0 +1,231 @@
+#settingsWrapper {
+	display: none;
+
+	.row {
+		margin: 0;
+		padding: 20px 0;
+		border-bottom: 1px solid #E7E7EC;
+		
+		.key {
+			font-size: 1.5em;
+			margin-bottom: 10px;
+			height: 100%;
+		}
+
+		.value {
+			font-size: 1.1em;
+			color: black;
+			height: 100%;
+		}
+	}
+
+	.groupUl {
+		.ancestor {
+			margin-bottom: 30px;
+
+			.editBtn, .saveBtn {
+				font-size: 0.7em;
+				padding: 2px 5px;
+				float: right;
+				display: none;
+			}
+
+			.group, .addGroup {
+				font-size: 0.9em;
+				padding: 10px 0;
+				margin-left: 25px;
+				height: 40px;
+				display: none;
+
+				.minus, .plus {
+					transition: opacity 0.3s;
+					float: right;
+					width: 1em;
+					height: 100%;
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center center;
+					cursor: pointer;
+					opacity: 0;
+				}
+
+				.minus {
+					background-image: asset_url("dashboard/settings/minus.png");
+				}
+				
+				.plus {
+					background-image: asset_url("dashboard/settings/plus.png");
+				}
+			}
+
+			.addGroup {
+				height: 54px;
+
+				.addGroupForm {
+					height: 100%;
+				}
+			}
+
+			.ancestorContainer {
+				font-size: 1.2em;
+				cursor: pointer;
+
+				.arrow {
+					width: 0.9em;
+					height: 0.9em;
+					float: left;
+					position: relative;
+					top: 0.3em;
+					margin-right: 10px;
+					background-image: asset_url("dashboard/settings/down_arrow.jpg");
+					background-size: contain;
+					background-repeat: no-repeat;
+					background-position: center center;
+				}
+			}
+
+			&.show {
+				.group {
+					display: list-item;
+				}
+
+				.arrow{
+					background-image: asset_url("dashboard/settings/up_arrow.jpg");	
+				}
+
+				.editBtn {
+					display: block;
+				}
+			}
+
+			&.edit {
+				.minus, .plus {
+					opacity: 1;
+				}
+
+				.editBtn {
+					display: none;
+				}
+
+				.saveBtn {
+					display: block;
+				}
+
+				.addGroup {
+					display: block;
+				}
+			}
+		}
+
+
+		caption {
+			position: relative;
+		}
+
+		td {
+			font-size: 0.8em;
+			padding: 8px 4px;
+			&.name, &.grade {
+				width: 8%;
+			}
+
+			&.group {
+				width: 15%;
+			}
+
+			&.phoneNumber {
+				width: 15%;
+			}
+
+			&.email {
+				width: 20%;
+			}
+
+			&.address {
+				width: 20%;
+			}
+
+			&.birthday {
+				width: 15%;
+			}
+
+			&.btns {
+				/*width: 5%;*/
+				height: 37px;
+			}
+
+			.minus, .plus {
+				transition: opacity 0.3s;
+				float: right;
+				width: 1em;
+				height: 100%;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center center;
+				cursor: pointer;
+				/*opacity: 0;*/
+			}
+
+			.minus {
+				background-image: asset_url("dashboard/settings/minus.png");
+			}
+			
+			.plus {
+				background-image: asset_url("dashboard/settings/plus.png");
+			}
+		}
+
+		.userTableWrapper {
+			.editBtn, .saveBtn {
+				padding: 2px 5px;
+				float: right;
+				display: none;
+			}
+
+			.minus {
+				transition: opacity 0.3s;
+				opacity: 0;
+			}
+			
+			.editBtn {
+				display: block;
+			}
+
+			.addUser {
+				display: none;
+			}
+
+			&.edit {
+				.saveBtn {
+					display: block;
+				}
+
+				.editBtn {
+					display: none;
+				}
+
+				.minus {
+					opacity: 1;
+				}
+
+				.addUser {
+					display: table-row;
+				}
+			}
+
+			.theadTable {
+				margin-bottom: 0;
+
+				input {
+					padding: 0;
+				}
+			}	
+
+			.userTbodyWrapper {
+				max-height: 200px;
+				overflow-y: auto;
+				margin-bottom: 20px;
+			}
+		}
+	}
+}
