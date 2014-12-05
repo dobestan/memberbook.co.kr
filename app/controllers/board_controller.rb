@@ -63,7 +63,21 @@ class BoardController < ApplicationController
 
 		respond_to do |format|
 			format.js { render :partial => "dashboard/boards/list" }
-			format.json { render @boards }
+			format.json { render json: @boards }
+		end
+	end
+
+	# GET /:group_code/boards/:board_id
+	# 학교 ( group_code ) 게시글 불러오기
+	def show
+		@board = Board.find(params[:board_id])
+		@board.count += 1
+		respond_to do |format|
+			if @board.save
+				format.json { render json: @board }
+			else
+				format.json { render plain: "fail"}
+			end
 		end
 	end
 end

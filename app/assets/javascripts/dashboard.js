@@ -271,9 +271,10 @@ var BoardManager = {
 	wrapper: $('#boardsWrapper'),
 	boardListRow: $('#boardsWrapper #boardListRow'),
 	writeBoardRow: $('#boardsWrapper #writeBoardRow'),
+	showBoardRow: $('#boardsWrapper #showBoardRow'),
 	form: $('#boardForm'),
 	editor: '',
-	// 리스트뷰, 글쓰기 뷰 전환
+	// 글쓰기 뷰 전환
 	changeRow: function(e) {
 		var target = $(e.target);
 		var activeRow = $('#boardsWrapper .row.active');
@@ -347,7 +348,7 @@ var BoardManager = {
 					this.reloadList(data);
 				}.bind(this),
 				error: function(msg) {
-					debugger;
+					alert(msg);
 				}
 			});	
 		// 화살표를 눌렀다면
@@ -355,17 +356,58 @@ var BoardManager = {
 			debugger;
 		}
 	},
+	show: function(e) {
+		var target = $(e.target);
+		var boardId = target.prev().text();
+		var groupCode = LoggedUser.groupCode;
+
+		$.ajax({
+			type: 'GET',
+			url: '/' + groupCode + '/boards/' + boardId,
+			success: function(data) {
+				var activeRow = this.wrapper.find('.row.active');
+				activeRow.fadeOut(300, function() {
+					activeRow.toggleClass('active');
+					this.showBoardRow.toggleClass('active');
+					this.showBoardRow.find('.title h3').text(data.title);
+					this.showBoardRow.find('.content').html(data.content);
+					this.showBoardRow.fadeIn(300);
+				}.bind(this));
+			}.bind(this),
+			error: function(msg) {
+
+			}
+		});
+	},
 	addBoardListRowEvent: function() {
 		this.wrapper.find('.writeBtn').click(this.changeRow);
 		this.wrapper.find('#boardPageNumUl').click(this.changePage.bind(this));
+		this.wrapper.find('#boardListRow table').click(this.show.bind(this));
+	},
+	backToList: function(e) {
+		var groupCode = LoggedUser.groupCode;
+		var pageNum = this.boardListRow.find('.boardPageNum.active').text();
+		$.ajax({
+			type: 'GET',
+			url: groupCode + '/boards',
+			dataType: 'text',
+			data: {
+				page_num: pageNum
+			},
+			success: function(data) {
+				this.reloadList(data);
+			}.bind(this),
+			error: function(msg) {
+				alert(msg);
+			}
+		});
 	},
 	init: function() {
 		this.form.find('textarea').ckeditor();
 		this.editor = CKEDITOR.instances.editor1;
 		this.addBoardListRowEvent();
-		this.wrapper.find('.listBtn').click(this.changeRow);
+		this.wrapper.find('.listBtn').click(this.backToList.bind(this));
 		this.wrapper.find('.saveBtn').click(this.add.bind(this));
-
 	}
 };
 
