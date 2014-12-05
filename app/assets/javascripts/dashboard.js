@@ -264,8 +264,8 @@ $('.userTableWrapper .plus').click(function(e) {
 $('#boardForm').ckeditor();
 
 $('#boardListRow #writeBtn').click(function(e) {
-	var activeRow = $('#boardWrapper .row.active');
-	var willBeActiveRow = $('#boardWrapper #writeBoardRow');
+	var activeRow = $('#boardsWrapper .row.active');
+	var willBeActiveRow = $('#boardsWrapper #writeBoardRow');
 
 	activeRow.fadeOut(300, function() {
 		$(this).toggleClass('active');
@@ -275,8 +275,8 @@ $('#boardListRow #writeBtn').click(function(e) {
 });
 
 $('#writeBoardRow .listBtn').click(function() {
-	var activeRow = $('#boardWrapper .row.active');
-	var willBeActiveRow = $('#boardWrapper #boardListRow');
+	var activeRow = $('#boardsWrapper .row.active');
+	var willBeActiveRow = $('#boardsWrapper #boardListRow');
 
 	activeRow.fadeOut(300, function() {
 		$(this).toggleClass('active');

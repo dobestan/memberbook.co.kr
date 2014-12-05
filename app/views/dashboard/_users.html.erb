@@ -1,0 +1,23 @@
+<div id="usersWrapper" class="wrapper">
+  <p id="usersP">Users</p>
+  <ul id="profileUl"> 
+    <div class="row">
+      <% @users.each do |user| %>
+        <li class="col-sm-5 col-md-5 profile <%= cycle("", "col-sm-offset-1 col-md-offset-1") %>">
+          <div class="front">
+            <div class="img"></div>
+            <p class="name"><%= user.name %></p>
+            <p><%= user.grade %></p>
+          </div>
+          <div class="back">
+            <div class="img"></div>
+            <p class="name"><%= user.name %></p>
+            <p class="subInfo"><%= user.phone_number %></p>
+            <p class="subInfo"><%= user.email %></p>
+            <p class="subInfo"><%= user.address %></p>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  </ul>
+</div>
