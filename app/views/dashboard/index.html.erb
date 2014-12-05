@@ -44,7 +44,7 @@
         </li>
       </ul>
     </div>
-    <div id="usersWrapper" style="display:none;">
+    <div id="usersWrapper" class="wrapper">
       <p id="usersP">Users</p>
       <ul id="profileUl"> 
         <div class="row">
@@ -67,7 +67,7 @@
         </div>
       </ul>
     </div>
-    <div id="groupInfoWrapper" style="display:none;">
+    <div id="groupInfoWrapper" class="wrapper">
       안녕
     </div>
     <div id="boardWrapper" class="wrapper">
@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    <div id="settingsWrapper" style="display:none;">
+    <div id="settingsWrapper" class="wrapper">
       <div class="row">
         <div class="col-sm-3 col-md-3 key">그룹 관리</div>
         <div class="col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1 value">
@@ -161,8 +161,10 @@
             <table class="table table-striped theadTable" data-level=<%= ancestor_group.level %> data-id=<%= ancestor_group.id %> data-code=<%= ancestor_group.code %>>
               <caption>
                 <%= ancestor_group.name %>
-                <button class="editBtn btn btn-default">Edit</button>
-                <button class="saveBtn btn btn-primary">Save</button>
+                <div class="btns">
+                  <button class="editBtn btn btn-default">Edit</button>
+                  <button class="saveBtn btn btn-primary">Save</button>
+                </div>
               </caption>
               <tr>
                 <td class="name">이름</td>

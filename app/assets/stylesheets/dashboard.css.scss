@@ -171,9 +171,12 @@ html, body {
 	.wrapper {
 		padding: 20px 100px 0;
 		color: #7D7D8E;
+		display: none;
 	}
 
 	#usersWrapper {
+		display: block;
+		
 		#profileUl {
 			margin-top: 20px;
 
