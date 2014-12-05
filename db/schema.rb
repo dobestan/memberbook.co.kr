@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20141205053833) do
   create_table "boards", force: true do |t|
     t.string   "writer"
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.integer  "count"
     t.integer  "level"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

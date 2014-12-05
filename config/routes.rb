@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   match '/:group_code/users', to: 'user#users', via: :GET
   match '/:group_code/:group_id/users', to: 'user#create', via: :POST
   match '/users/:user_id', to: 'user#destroy', via: :DELETE
+
+  # Board routes
+  match '/:group_code/boards', to: 'board#create', via: :POST
+
   # Sidekiq DashBoard
   mount Sidekiq::Web, at: '/sidekiq'
 

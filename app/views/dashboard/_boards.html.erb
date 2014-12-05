@@ -1,50 +1,16 @@
 <div id="boardsWrapper" class="wrapper">
-  <div id="boardListRow" class="row active">
-    <div class="col-sm-12 col-md-12 key">게시판</div>
-    <div class="col-sm-12 col-md-12 value">
-      <table class="table table-striped table-hover">
-        <caption></caption>
-        <thead>
-          <tr>
-            <td>글번호</td>
-            <td>글제목</td>
-            <td>작성자</td>
-            <td>조회수</td>
-          </tr>
-        </thead>
-        <tbody>
-          <% (1..10).each do |i| %>
-            <tr>
-              <td><%= i %></td>
-              <td>성균관대 EMBA 멤버북 원우수첩 런칭!</td>
-              <td>현제혁</td>
-              <td>100</td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <div id="boardPageNumWrapper">
-        <ul id="boardPageNumUl" class="pagination pagination-sm">
-          <li class="boardPageNum"><a href="#">«</a></li>
-          <li class="boardPageNum active"><a href="#">1</a></li>
-          <% (2..3).each do |i| %>  
-            <li class="boardPageNum"><a href="#"><%= i %></a></li>
-          <% end %>
-          <li class="boardPageNum"><a href="#">»</a></li>
-        </ul>
-        <button id="writeBtn" class="btn btn-default">글쓰기</button>
-      </div>
-    </div>
-  </div>
+  <%= render "dashboard/boards/list" %>
   <div id="writeBoardRow" class="row">
     <div class="col-sm-12 col-md-12 key">글쓰기</div>
     <div class="col-sm-12 col-md-12 value">
-      <input type="text" placeholder="제목을 입력하세요">
-      <textarea id="boardForm"></textarea>
-      <div class="btns">
-        <button class="btn btn-default listBtn">목록</button>
-        <button class="btn btn-default saveBtn">저장하기</button>
-      </div>
+      <form id="boardForm">
+        <input id="titleInput" type="text" placeholder="제목을 입력하세요">
+        <textarea></textarea>
+        <div class="btns">
+          <button class="btn btn-default listBtn" data-row="boardListRow">목록</button>
+          <button class="btn btn-default saveBtn">저장하기</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

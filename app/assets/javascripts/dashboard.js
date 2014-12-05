@@ -1,5 +1,5 @@
 var LoggedUser = {
-	userId: $('#userIdInput')
+	id: $('#userIdInput').val(),
 };
 
 var LeftSidebar = {
@@ -25,6 +25,9 @@ var LeftSidebar = {
 				$(this).find('.active').toggleClass('active');
 				target.toggleClass('active');
 				
+				// 로그인된 유저가 현재 선택한 그룹 코드 설정
+				LoggedUser.groupCode = target.data('code');
+
 				// 각 유저 당 탬플릿 생성
 				$(data).each(function(idx, value) {
 					profile = userTemplate({
@@ -51,7 +54,10 @@ var LeftSidebar = {
 	},
 	init: function() {
 		// 첫번째 그룹 포커싱 초기화
-		this.groupUl.find('.group').eq(1).addClass('active');
+		var firstGroup = this.groupUl.find('.group').eq(1);
+		firstGroup.addClass('active');
+		// 로그인된 유저가 현재 선택한 그룹 코드 설정
+		LoggedUser.groupCode = firstGroup.data('code');
 		this.groupUl.click(this.selectAnotherGroup);
 	}
 };
@@ -261,30 +267,68 @@ $('.userTableWrapper .plus').click(function(e) {
 	});
 });
 
-$('#boardForm').ckeditor();
+var BoardManager = {
+	wrapper: $('#boardsWrapper'),
+	boardListRow: $('#boardsWrapper #boardListRow'),
+	writeBoardRow: $('#boardsWrapper #writeBoardRow'),
+	form: $('#boardForm'),
+	editor: '',
+	// 리스트뷰, 글쓰기 뷰 전환
+	changeRow: function(e) {
+		var target = $(e.target);
+		var activeRow = $('#boardsWrapper .row.active');
+		var willBeActiveRow = $('#' + target.data('row'));
 
-$('#boardListRow #writeBtn').click(function(e) {
-	var activeRow = $('#boardsWrapper .row.active');
-	var willBeActiveRow = $('#boardsWrapper #writeBoardRow');
+		debugger;
 
-	activeRow.fadeOut(300, function() {
-		$(this).toggleClass('active');
-		willBeActiveRow.toggleClass('active');
-		willBeActiveRow.fadeIn(300);
-	});
-});
+		if (target.is('.btn')) {
+			activeRow.fadeOut(300, function() {
+				$(this).toggleClass('active');
+				willBeActiveRow.toggleClass('active');
+				willBeActiveRow.fadeIn(300);
+			});
+		}
+	},
+	add: function(e) {
+		var selectedGorupCode = LoggedUser.groupCode;
+		var userId = LoggedUser.id;
+		var title = this.form.find('#titleInput').val();
+		var content = this.editor.getData();
 
-$('#writeBoardRow .listBtn').click(function() {
-	var activeRow = $('#boardsWrapper .row.active');
-	var willBeActiveRow = $('#boardsWrapper #boardListRow');
+		$.ajax({
+			type: 'POST',
+			url: '/' + selectedGorupCode + '/boards',
+			dataType: 'text',
+			data: {
+				user_id: userId,
+				title: title,
+				content: content,
+				level: 0
+			},
+			success: function(data) {
+				this.form[0].reset();
+				this.editor.setData('');
+				this.writeBoardRow.fadeOut(300, function() {
+					this.boardListRow.remove();
+					this.writeBoardRow.toggleClass('active');
+					$('#boardsWrapper').append(data);
+					this.boardListRow = this.wrapper.find('#boardListRow');
+					this.wrapper.fadeIn(300);
+					this.wrapper.find('.writeBtn').click(this.changeRow);
+				}.bind(this));
+			}.bind(this),
+			error: function() {
+				alert('글쓰기를 실패했습니다');
+			}
+		});
+	},
+	init: function() {
+		this.form.find('textarea').ckeditor();
+		this.editor = CKEDITOR.instances.editor1;
+		this.wrapper.find('.writeBtn').click(this.changeRow);
+		this.wrapper.find('.listBtn').click(this.changeRow);
+		this.wrapper.find('.saveBtn').click(this.add.bind(this));
+	}
+};
 
-	activeRow.fadeOut(300, function() {
-		$(this).toggleClass('active');
-		willBeActiveRow.toggleClass('active');
-		willBeActiveRow.fadeIn(300);
-	});
-});
-
-$('#writeBoardRow .saveBtn').click(function() {
-
-});
+BoardManager.init();

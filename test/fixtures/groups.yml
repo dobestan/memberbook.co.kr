@@ -8,6 +8,7 @@ one: {
 	id: 1,
 	name: '성균관대 EMBA',
 	point: 10000,
+	code: 0,
 	level: 0
 }
 
@@ -16,6 +17,7 @@ two: {
 	name: '건설경영',
 	point: 20000,
 	level: 1,
+	code: 0,
 	parent_id: 1
 }
 
@@ -24,6 +26,7 @@ three: {
 	name: '건설사업',
 	point: 30000,
 	level: 1,
+	code: 0,
 	parent_id: 1
 }
 
@@ -32,6 +35,7 @@ four: {
 	name: '영업',
 	point: 20000,
 	level: 2,
+	code: 0,
 	parent_id: 3
 }
 
@@ -39,6 +43,7 @@ five: {
 	id: 5,
 	name: '예술대학원',
 	point: 10000,
+	code: 1,
 	level: 0
 }
 
@@ -47,5 +52,6 @@ six: {
 	name: '산업디자인',
 	point: 1000,
 	level: 1,
+	code: 1,
 	parent_id: 5
 }

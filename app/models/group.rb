@@ -6,6 +6,8 @@ class Group < ActiveRecord::Base
 	
 	scope :top_level, where(:parent_id => nil)
 
+  has_many :boards
+
   def ancestor
     if self.level == 0
       return self
