@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   match '/dashboard', to: 'dashboard#index', via: :GET
 
+  # Product 즉, 모바일 & 태블릿 뷰
+  match '/product/users', to: 'product#users', via: :GET
+  
   # Group routes
   match '/:group_code/:group_id/users', to: 'group#users', via: :GET
   match '/:group_code/:group_id/groups', to: 'group#create', via: :POST

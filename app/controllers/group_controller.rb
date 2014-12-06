@@ -7,6 +7,7 @@ class GroupController < ApplicationController
 		@users = @group.users
 
 		respond_to do |format|
+			format.html
 			format.js { render :partial => "dashboard/users" }
 			format.json { render json: @users }
 		end
