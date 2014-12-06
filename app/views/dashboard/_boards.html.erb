@@ -1,28 +1,26 @@
-<div id="boardsWrapper" class="wrapper">
-  <%= render "dashboard/boards/list" %>
-  <div id="writeBoardRow" class="row">
-    <div class="col-sm-12 col-md-12 key">글쓰기</div>
-    <div class="col-sm-12 col-md-12 value">
-      <form id="boardForm">
-        <input id="titleInput" type="text" placeholder="제목을 입력하세요">
-        <textarea></textarea>
-        <div class="btns">
-          <button class="btn btn-default listBtn" data-row="boardListRow">목록</button>
-          <button class="btn btn-default saveBtn">저장하기</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div id="showBoardRow" class="row">
-    <div class="col-sm-12 col-md-12 key"></div>
-    <div class="col-sm-12 col-md-12 value">
-      <div class="page-header title">
-        <h3>게시글 제목</h3>
-      </div>
-      <div class="content">게시글 내용</div>
+<div id="boardListRow" class="row active"></div>
+<div id="writeBoardRow" class="row">
+  <div class="col-sm-12 col-md-12 key">글쓰기</div>
+  <div class="col-sm-12 col-md-12 value">
+    <form id="boardForm">
+      <input id="titleInput" type="text" placeholder="제목을 입력하세요">
+      <textarea></textarea>
       <div class="btns">
         <button class="btn btn-default listBtn" data-row="boardListRow">목록</button>
+        <button class="btn btn-default saveBtn">저장하기</button>
       </div>
+    </form>
+  </div>
+</div>
+<div id="showBoardRow" class="row">
+  <div class="col-sm-12 col-md-12 key"></div>
+  <div class="col-sm-12 col-md-12 value">
+    <div class="page-header title">
+      <h3>게시글 제목</h3>
+    </div>
+    <div class="content">게시글 내용</div>
+    <div class="btns">
+      <button class="btn btn-default listBtn" data-row="boardListRow">목록</button>
     </div>
   </div>
 </div>

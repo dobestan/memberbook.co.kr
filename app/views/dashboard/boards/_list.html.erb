@@ -1,36 +1,34 @@
-<div id="boardListRow" class="row active">
-  <div class="col-sm-12 col-md-12 key">게시판</div>
-  <div class="col-sm-12 col-md-12 value">
-    <table class="table table-striped table-hover">
-      <caption></caption>
-      <thead>
+<div class="col-sm-12 col-md-12 key">게시판</div>
+<div class="col-sm-12 col-md-12 value">
+  <table class="table table-striped table-hover">
+    <caption></caption>
+    <thead>
+      <tr>
+        <td class="number">글번호</td>
+        <td class="title">제목</td>
+        <td class="writer">작성자</td>
+        <td class="count">조회수</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @boards.each do |board| %>
         <tr>
-          <td class="number">글번호</td>
-          <td class="title">제목</td>
-          <td class="writer">작성자</td>
-          <td class="count">조회수</td>
+          <td class="number"><%= board.id %></td>
+          <td class="title"><%= board.title %></td>
+          <td class="writer"><%= board.writer %></td>
+          <td class="count"><%= board.count %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @boards.each do |board| %>
-          <tr>
-            <td class="number"><%= board.id %></td>
-            <td class="title"><%= board.title %></td>
-            <td class="writer"><%= board.writer %></td>
-            <td class="count"><%= board.count %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div id="boardPageNumWrapper">
-      <ul id="boardPageNumUl" class="pagination pagination-sm">
-        <li class="boardPageNum"><a href="#">«</a></li>
-        <% @page_nums.each do |page_num| %>
-          <li class="boardPageNum <%=raw "active" if page_num == @active_page_num %>"><a href="#"><%= page_num %></a></li>
-        <% end %>
-        <li class="boardPageNum"><a href="#">»</a></li>
-      </ul>
-      <button class="btn btn-default writeBtn" data-row="writeBoardRow">글쓰기</button>
-    </div>
+      <% end %>
+    </tbody>
+  </table>
+  <div id="boardPageNumWrapper">
+    <ul id="boardPageNumUl" class="pagination pagination-sm">
+      <li class="boardPageNum"><a href="#">«</a></li>
+      <% @page_nums.each do |page_num| %>
+        <li class="boardPageNum <%=raw "active" if page_num == @active_page_num %>"><a href="#"><%= page_num %></a></li>
+      <% end %>
+      <li class="boardPageNum"><a href="#">»</a></li>
+    </ul>
+    <button class="btn btn-default writeBtn" data-row="writeBoardRow">글쓰기</button>
   </div>
 </div>

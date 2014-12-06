@@ -1,5 +1,11 @@
+String.prototype.capitalize = function() {
+	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
 var LoggedUser = {
 	id: $('#userIdInput').val(),
+	groupCode: $('#groupCodeInput').val(),
+	groupId: $('#groupIdInput').val()
 };
 
 var LeftSidebar = {
@@ -64,7 +70,7 @@ var LeftSidebar = {
 
 LeftSidebar.init();
 
-var User = {
+var UserManager = {
 	wrapper: $('#usersWrapper'),
 	profileUl: $('#usersWrapper #profileUl'),
 	toggleUserFace: function(e) {
@@ -73,39 +79,38 @@ var User = {
 		// 앞면 뒷면 토글
 		$(target).toggleClass('backOn');
 	},
+	initWrapper: function(wrapper) {
+		var groupCode = LoggedUser.groupCode;
+		var groupId = LoggedUser.groupId;
+
+		$.ajax({
+			type: 'GET',
+			url: '/' + groupCode + '/' + groupId + '/users.js',
+			dataType: 'text',
+			success: function(data) {
+				this.wrapper.html($(data));
+				wrapper.fadeIn(300);
+			}.bind(this),
+			error: function(msg) {
+				alert(msg);
+			}
+		});
+	},
 	init: function() {
 		this.profileUl.click(this.toggleUserFace);
 	}
 };
 
-User.init();
+UserManager.init();
 
-var NavBar = {
-	elementUl: $('#navBar #elementUl'),
-	selectMenu: function(e) {
-		// li 요소 검색
-		var target = $(e.target).closest('li');
-
-		if (target.is('li')) {
-			// 포커싱 변경
-			var preFocusedElement = $(this).find('.active');
-			preFocusedElement.toggleClass('active');
-			target.toggleClass('active');
-
-			// 메인 컨텐츠 변경
-			$('#' + preFocusedElement.data('wrapper')).fadeOut(300, function() {
-				$('#' + target.data('wrapper')).fadeIn(300);
-			});	
-		}
-	},
-	init: function() {
-		this.elementUl.click(this.selectMenu);
+var GroupInfoManager = {
+	wrapper: $('#groupInfoWrapper'),
+	initWrapper: function(wrapper) {
+		wrapper.fadeIn(300);
 	}
 };
 
-NavBar.init();
-
-var Setting = {
+var SettingsManager = {
 	wrapper: $('#settingsWrapper'),
 	userTableWrapper: $('.userTableWrapper'),
 
@@ -187,6 +192,9 @@ var Setting = {
 			$(this).parents('.userTableWrapper').toggleClass('edit');	
 		}
 	},
+	initWrapper: function(wrapper) {
+		wrapper.fadeIn(300);
+	},
 	init: function() {
 		this.wrapper.find('.ancestorContainer').click(this.activateGroupEdit);
 		this.wrapper.find('.ancestor .plus').click(this.addGroup);
@@ -195,7 +203,7 @@ var Setting = {
 	}
 };
 
-Setting.init();
+SettingsManager.init();
 
 $('.userTableWrapper .userTbodyWrapper').click(function(e) {
 	var target = $(e.target);
@@ -292,12 +300,12 @@ var BoardManager = {
 		var activeRow = this.wrapper.find('.row.active');
 		activeRow.fadeOut(300, function() {
 			activeRow.toggleClass('active');
-			// 기존 리스트 삭제
-			this.boardListRow.remove();
 			this.wrapper.hide();
+			// boardList 보이기
+			this.boardListRow.show();
+			this.boardListRow.toggleClass('active');
 			// 새로 rendering 한 partial 추가
-			$('#boardsWrapper').append(data);
-			this.boardListRow = this.wrapper.find('#boardListRow');
+			$('#boardsWrapper #boardListRow').html(data);
 			this.addBoardListRowEvent();
 			this.wrapper.fadeIn(300);
 		}.bind(this));
@@ -310,7 +318,7 @@ var BoardManager = {
 
 		$.ajax({
 			type: 'POST',
-			url: '/' + selectedGorupCode + '/boards',
+			url: '/' + selectedGorupCode + '/boards.js',
 			dataType: 'text',
 			data: {
 				user_id: userId,
@@ -339,7 +347,7 @@ var BoardManager = {
 			var groupCode = LoggedUser.groupCode;
 			$.ajax({
 				type: 'GET',
-				url: '/' + groupCode + '/boards',
+				url: '/' + groupCode + '/boards.js',
 				dataType: 'text',
 				data: {
 					page_num: val
@@ -384,12 +392,12 @@ var BoardManager = {
 		this.wrapper.find('#boardPageNumUl').click(this.changePage.bind(this));
 		this.wrapper.find('#boardListRow table').click(this.show.bind(this));
 	},
-	backToList: function(e) {
+	getBoardList: function(e) {
 		var groupCode = LoggedUser.groupCode;
 		var pageNum = this.boardListRow.find('.boardPageNum.active').text();
 		$.ajax({
 			type: 'GET',
-			url: groupCode + '/boards',
+			url: groupCode + '/boards.js',
 			dataType: 'text',
 			data: {
 				page_num: pageNum
@@ -402,13 +410,70 @@ var BoardManager = {
 			}
 		});
 	},
+	initWrapper: function(wrapper) {
+		var groupCode = LoggedUser.groupCode;
+		var pageNum = 1;
+
+		$.ajax({
+			type: 'GET',
+			url: '/' + groupCode + '/boards.js',
+			dataType: 'text',
+			data: {
+				page_num: pageNum
+			},
+			success: function(data) {
+				$('#boardsWrapper #boardListRow').html(data);
+				BoardManager.boardListRow = BoardManager.wrapper.find('#boardListRow');
+				BoardManager.addBoardListRowEvent();
+				wrapper.fadeIn(300);
+			}.bind(this),
+			error: function(msg) {
+				alert(msg);
+			}
+		});
+	},
 	init: function() {
 		this.form.find('textarea').ckeditor();
 		this.editor = CKEDITOR.instances.editor1;
 		this.addBoardListRowEvent();
-		this.wrapper.find('.listBtn').click(this.backToList.bind(this));
+		this.wrapper.find('.listBtn').click(this.getBoardList.bind(this));
 		this.wrapper.find('.saveBtn').click(this.add.bind(this));
 	}
 };
 
 BoardManager.init();
+
+WrapperManager = {
+	wrappers: $('.wrapper'),
+	usersWrapper: UserManager,
+	groupInfoWrapper: GroupInfoManager,
+	boardsWrapper: BoardManager,
+	settingsWrapper: SettingsManager
+};
+
+var NavBar = {
+	wrapperManager: WrapperManager,
+	elementUl: $('#navBar #elementUl'),
+	selectMenu: function(e) {
+		if (this.wrapperManager.wrappers.is(':animated')) return;
+		// li 요소 검색
+		var target = $(e.target).closest('li');
+
+		if (target.is('li')) {
+			// 포커싱 변경
+			var preFocusedElement = this.elementUl.find('.active');
+			preFocusedElement.toggleClass('active');
+			target.toggleClass('active');
+			// 메인 컨텐츠 변경
+			$('#' + preFocusedElement.data('wrapper')).fadeOut(300, function() {
+				var wrapper = target.data('wrapper')
+				this.wrapperManager[wrapper].initWrapper($('#' + wrapper));
+			}.bind(this));
+		}
+	},
+	init: function() {
+		this.elementUl.click(this.selectMenu.bind(this));
+	}
+};
+
+NavBar.init();

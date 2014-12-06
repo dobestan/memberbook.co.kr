@@ -1,5 +1,5 @@
 class GroupController < ApplicationController
-	# GET /:group_code/:group_id/users.json
+	# GET /:group_code/:group_id/users
 	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
 	def users
@@ -7,6 +7,7 @@ class GroupController < ApplicationController
 		@users = @group.users
 
 		respond_to do |format|
+			format.js { render :partial => "dashboard/users" }
 			format.json { render json: @users }
 		end
 	end

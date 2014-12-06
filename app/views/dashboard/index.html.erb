@@ -11,6 +11,8 @@
         <div id="profileImg"></div>
         <p id="emailP">hook3748@gmail.com</p>
         <input id="userIdInput" type="hidden" value="1">
+        <input id="groupCodeInput" type="hidden" value="1">
+        <input id="groupIdInput" type="hidden" value="2">
       </div>
     </div>
     <div id="thirdRow">
@@ -45,10 +47,18 @@
         </li>
       </ul>
     </div>
-    <%= render "users" %>
-    <%= render "group_info" %>
-    <%= render "boards" %>
-    <%= render "settings" %>
+    <div id="usersWrapper" class="wrapper">
+      <%= render "users" %>
+    </div>
+    <div id="groupInfoWrapper" class="wrapper">
+      <%= render "group_info" %>
+    </div>
+    <div id="boardsWrapper" class="wrapper">
+      <%= render "boards" %>
+    </div>
+    <div id="settingsWrapper" class="wrapper">
+      <%= render "settings" %>
+    </div>
   </div>
 </div>
 <script id="userTemplate" type="text/template">
