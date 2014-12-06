@@ -3,7 +3,7 @@ require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
-# require 'mina/foreman'
+require 'mina/foreman'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -16,7 +16,7 @@ set :domain, 'memberbook.co.kr'
 set :deploy_to, '/var/www/memberbook'
 
 set :repository, 'git@github.com:dobestan/memberbook.co.kr.git'
-set :branch, 'master'
+set :branch, 'develop'
 
 # For system-wide RVM install.
 set :rvm_path, '/home/ubuntu/.rvm/bin/rvm'
@@ -63,13 +63,13 @@ task :deploy => :environment do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     # invoke :'rails:db_migrate'
-    # invoke :'rails:assets_precompile'
+    invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
-      # invoke "foreman:start"
+      invoke "foreman:start"
     end
   end
 end
