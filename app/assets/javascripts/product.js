@@ -14,3 +14,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require underscore
+//= require_self
+
+// 탭바 이벤트
+$('#elementUl').on('touchstart', function() {
+	$.ajax({
+		type: 'GET',
+		url: 'product/boards',
+		dataType: 'text',
+		success: function(data) {
+			$('#contentWrapper').html($(data));
+		},
+		error: function(msg) {
+
+		}
+	});
+});
