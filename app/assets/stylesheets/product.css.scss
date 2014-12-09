@@ -26,34 +26,36 @@ html, body {
 
 #bodyWrapper {
 	height: 100%;
+}
 
-	#headerWrapper {
-		position: fixed;
-		top: 0;
-		height: $header-height;
-		width: 100%;
-		background-color: red;
-		z-index: 100;
-	}
+#footerWrapper {
+	position: fixed;
+	bottom: 0;
+	height: $footer-height;
+	width: 100%;
+	z-index: 100;
+}
 
-	#contentWrapper {
-		position: absolute;
-		height: calc(100% - 100px);
-		width: 100%;
-		top: 50px;
-		overflow-y: auto;
-		overflow-x: hidden;
+#headerWrapper {
+	position: fixed;
+	top: 0;
+	height: $header-height;
+	width: 100%;
+	background-color: red;
+	z-index: 100;
+}
 
-		.table {
-			margin-bottom: 0;
-		}
-	}
+#contentWrapper {
+	position: absolute;
+	height: calc(100% - 100px);
+	width: 100%;
+	top: 50px;
+	overflow-y: auto;
+	overflow-x: hidden;
 
-	#footerWrapper {
-		position: fixed;
-		bottom: 0;
-		height: $footer-height;
-		width: 100%;
-		z-index: 100;
-	}
+	
+}
+
+#contentWrapper .table {
+	margin-bottom: 0;
 }

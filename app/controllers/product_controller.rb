@@ -22,4 +22,15 @@ class ProductController < ApplicationController
 			format.html { render :partial => "product/boards" }
 		end
 	end
+
+	# GET /product/users
+	def users
+		group_id = 1
+		group = Group.find(group_id)
+		@users = group.users
+
+		respond_to do |format|
+			format.html { render :partial => "product/users" }
+		end	
+	end
 end
