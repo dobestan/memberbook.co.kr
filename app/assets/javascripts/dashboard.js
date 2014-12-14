@@ -13,46 +13,63 @@ var LeftSidebar = {
 		var groupCode = target.data('code');
 		var groupId = target.data('id');
 
-		$.ajax({
-			type: 'GET',
-			url: '/' + groupCode + '/' + groupId + '/users',
-			success: function(data) {
-				var userTemplate = $('#userTemplate');
-				userTemplate = _.template(userTemplate.text());
+		// 로그인된 유저가 현재 선택한 그룹 코드 설정
+		LoggedUser.groupCode = target.data('code');
+		LoggedUser.groupId = target.data('id');
 
-				var profiles = "";
-				var profile;
+		// 메뉴 포커싱 변경
+		$(this).find('.active').toggleClass('active');
+		target.toggleClass('active');
 
-				// 메뉴 포커싱 변경
-				$(this).find('.active').toggleClass('active');
-				target.toggleClass('active');
-				
-				// 로그인된 유저가 현재 선택한 그룹 코드 설정
-				LoggedUser.groupCode = target.data('code');
-
-				// 각 유저 당 탬플릿 생성
-				$(data).each(function(idx, value) {
-					profile = userTemplate({
-						offsetClass: idx % 2 !== 0 ? 'col-sm-offset-1 col-md-offset-1' : '',
-						name: value.name,
-						grade: value.grade,
-						phone_number: value.phone_number,
-						email: value.email,
-						address: value.address
-					});
-
-					profiles += profile;
-				}.bind(this));
-
-				// 기존 그룹 유저 하이드
-				$('#profileUl .row').fadeOut(300, function() {
-					$(this).children().remove();
-					// 새 그룹 유저 돔에 추가
-					$(profiles).appendTo($(this));
-					$(this).fadeIn(300);
-				});
-			}.bind(this)
+		var activeWrapperName = $('#navBar .element.active').data('wrapper');
+		var activeWrapper = $('#' + activeWrapperName);
+		NavBar.initFocus();
+		activeWrapper.fadeOut(300, function() {
+			UserManager.initWrapper($('#usersWrapper'));
 		});
+		// $.ajax({
+		// 	type: 'GET',
+		// 	url: '/' + groupCode + '/' + groupId + '/users.js',
+		// 	dataType: 'text',
+		// 	success: function(data) {
+		// 		// var userTemplate = $('#userTemplate');
+		// 		// userTemplate = _.template(userTemplate.text());
+
+		// 		// var profiles = "";
+		// 		// var profile;
+
+		// 		// 메뉴 포커싱 변경
+		// 		// $(this).find('.active').toggleClass('active');
+		// 		// target.toggleClass('active');
+				
+		// 		// 로그인된 유저가 현재 선택한 그룹 코드 설정
+		// 		// LoggedUser.groupCode = target.data('code');
+
+		// 		// 각 유저 당 탬플릿 생성
+		// 		// $(data).each(function(idx, value) {
+		// 		// 	profile = userTemplate({
+		// 		// 		offsetClass: idx % 2 !== 0 ? 'col-sm-offset-1 col-md-offset-1' : '',
+		// 		// 		name: value.name,
+		// 		// 		grade: value.grade,
+		// 		// 		phone_number: value.phone_number,
+		// 		// 		email: value.email,
+		// 		// 		address: value.address
+		// 		// 	});
+
+		// 		// 	profiles += profile;
+		// 		// }.bind(this));
+
+		// 		// 기존 그룹 유저 하이드
+		// 		// $('#profileUl .row').fadeOut(300, function() {
+		// 		// 	$(this).children().remove();
+		// 		// 	// 새 그룹 유저 돔에 추가
+		// 		// 	$(profiles).appendTo($(this));
+		// 		// 	$(this).fadeIn(300);
+		// 		// });
+
+					
+		// 	}.bind(this)
+		// });
 	},
 	init: function() {
 		// 첫번째 그룹 포커싱 초기화
@@ -78,7 +95,7 @@ var UserManager = {
 	initWrapper: function(wrapper) {
 		var groupCode = LoggedUser.groupCode;
 		var groupId = LoggedUser.groupId;
-
+		debugger;
 		$.ajax({
 			type: 'GET',
 			url: '/' + groupCode + '/' + groupId + '/users.js',
@@ -419,7 +436,6 @@ var BoardManager = {
 			},
 			success: function(data) {
 				$('#boardsWrapper #boardListRow').html(data);
-				BoardManager.boardListRow = BoardManager.wrapper.find('#boardListRow');
 				BoardManager.addBoardListRowEvent();
 				wrapper.fadeIn(300);
 			}.bind(this),
@@ -460,12 +476,21 @@ var NavBar = {
 			var preFocusedElement = this.elementUl.find('.active');
 			preFocusedElement.toggleClass('active');
 			target.toggleClass('active');
+			debugger;
 			// 메인 컨텐츠 변경
 			$('#' + preFocusedElement.data('wrapper')).fadeOut(300, function() {
 				var wrapper = target.data('wrapper')
+				debugger;
 				this.wrapperManager[wrapper].initWrapper($('#' + wrapper));
 			}.bind(this));
 		}
+	},
+	initFocus: function() {
+		var preFocusedElement = this.elementUl.find('.active');
+		preFocusedElement.toggleClass('active');
+		// debugger;
+		this.elementUl.children().first().toggleClass('active');
+		// debugger;
 	},
 	init: function() {
 		this.elementUl.click(this.selectMenu.bind(this));

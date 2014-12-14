@@ -1,0 +1,20 @@
+<div id="bodyWrapper">
+	<div id="headerWrapper">
+	</div>
+	<div id="contentWrapper">
+		<table class="table table-striped">
+			<% (0..20).each do |group| %>
+			<tr>
+				<td><%= group %></td>
+			</tr>
+			<% end %>
+		</table>
+	</div>
+	<div id="footerWrapper">
+		<ul id="elementUl">
+			<li class="element" data-url="users">유저</li>
+			<li class="element" data-url="boards">알림</li>
+			<li class="element">더보기</li>
+		</ul>
+	</div>
+</div>
