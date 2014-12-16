@@ -73,3 +73,5 @@ gem 'figaro'
 
 # HTML 템플릿 라이브러리
 gem 'underscore-rails', '~> 1.7.0'
+
+gem 'asset_sync'

@@ -20,3 +20,16 @@ API_MAILGUN_default_send_email: "contact@memberbook.co.kr"
 API_Google_Analytics_key: "UA-56313696-1"
 test:
   API_Google_Analytics_key: ~
+
+# asset_sync
+FOG_DIRECTORY: "memberbook"
+FOG_PROVIDER: "AWS"
+FOG_REGION: "ap-northeast-1"
+ASSET_SYNC_GZIP_COMPRESSION: "true"
+ASSET_SYNC_MANIFEST: "true"
+ASSET_SYNC_EXISTING_REMOTE_FILES: "delete"
+AWS_ACCESS_KEY_ID: "AKIAIQHOPOK6MR4BE2UQ"
+AWS_SECRET_ACCESS_KEY: "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"
+
+# production
+SECRET_KEY_BASE: bcd20bd6fc7f2b81ab18eb7e33a0abefdbac783f57df242dd6303bd4aec8c9b2832686598673d3b7895bc2ad1880fa193955eb2e836966a5cecdddf108bde897
