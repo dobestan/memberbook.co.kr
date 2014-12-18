@@ -57,12 +57,11 @@ class UserController < ApplicationController
   def get_confirm_number
     dest_phone = params[:phone_number]
 
-    authentification_number = 1592
-    response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "메세지 테스트입니다.")
+    authentification_number = (rand() * 1000000).to_i
+    response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "인증번호: #{authentification_number}")
     flash[:authentification_number] = authentification_number
-    session[:hi] = "hi?"
 
-    render plain: 1592
+    render plain: authentification_number
   end
 
   def confirm
@@ -73,8 +72,10 @@ class UserController < ApplicationController
     puts "real auth num: #{authentification_number}"
     puts "session[:hi]: #{session[:hi]}"
     
-    respond_to do |format|
-      format.json { render plain: "success?"}
+    if authentification_number_input.to_i == authentification_number
+      render plain: "success"
+    else
+      render plain: "fail"
     end
   end
 end

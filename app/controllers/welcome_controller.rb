@@ -6,6 +6,5 @@ class WelcomeController < ApplicationController
   end
 
   def login
-  	# flash[:authentification_number] = nil
   end
 end

@@ -48,6 +48,8 @@ class BoardController < ApplicationController
 		else
 			@active_page_num = page_num
 		end
+		@active_page_num = @active_page_num == 0 ? 1 : @active_page_num
+
 		puts "@active_page_num: #{@active_page_num}"
 		@page_nums = []
 
@@ -58,6 +60,7 @@ class BoardController < ApplicationController
 		end
 		@page_nums.slice!(10)
 		# 게시글 페이지 전환 시 게시글 오프셋
+
 		@offset_board_num = (@active_page_num - 1) * 10
 		@boards = @boards.offset(@offset_board_num).limit(10).order(id: :desc)
 
@@ -75,6 +78,7 @@ class BoardController < ApplicationController
 		respond_to do |format|
 			if @board.save
 				format.json { render json: @board }
+				format.html { render "product/board" }
 			else
 				format.json { render plain: "fail"}
 			end

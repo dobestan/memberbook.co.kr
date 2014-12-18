@@ -15,6 +15,7 @@
  *= require common
  *= require product/users
  *= require product/boards
+ *= require product/board
  */
 
 $header-height: 50px;
@@ -52,8 +53,6 @@ html, body {
 	top: 50px;
 	overflow-y: auto;
 	overflow-x: hidden;
-
-	
 }
 
 #contentWrapper .table {
