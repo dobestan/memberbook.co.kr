@@ -75,3 +75,6 @@ gem 'figaro'
 gem 'underscore-rails', '~> 1.7.0'
 
 gem 'asset_sync'
+
+# assets:precompile without md5
+gem "non-stupid-digest-assets"
