@@ -8,6 +8,10 @@ AssetSync.configure do |config|
   # config.aws_reduced_redundancy = true
   config.fog_directory = ENV['FOG_DIRECTORY']
 
+  config.manifest = false
+  # S3 이미지 오버라이딩
+  config.existing_remote_files = 'ignore'
+
   # Invalidate a file on a cdn after uploading files
   # config.cdn_distribution_id = "12345"
   # config.invalidate = ['file1.js']

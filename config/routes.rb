@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   match '/email', to: 'messages#send_email',via: :GET
 
   match '/login', to: 'welcome#login', via: :GET
-  match '/get_confirm_number', to: 'welcome#get_confirm_number', via: :GET
-  match '/confirm', to: 'welcome#confirm', via: :POST
   # Dashboard
   match '/dashboard', to: 'dashboard#index', via: :GET
 
@@ -33,6 +31,8 @@ Rails.application.routes.draw do
   match '/:group_code/users', to: 'user#users', via: :GET
   match '/:group_code/:group_id/users', to: 'user#create', via: :POST
   match '/users/:user_id', to: 'user#destroy', via: :DELETE
+  match '/:group_code/get_confirm_number', to: 'user#get_confirm_number', via: :GET
+  match '/confirm', to: 'user#confirm', via: :POST
 
   # Board routes
   match '/:group_code/boards', to: 'board#create', via: :POST
