@@ -11,16 +11,16 @@ Rails.application.routes.draw do
   match '/test', to: 'messages#index', via: :GET
   match '/result', to: 'messages#result', via: :GET
   match '/email', to: 'messages#send_email', via: :GET
-  match '/upload_data', to: 'welcome#upload_data', via: :GET
+  # match '/upload_data', to: 'welcome#upload_data', via: :GET
 
-  match '/login', to: 'welcome#login', via: :GET
+  # match '/login', to: 'welcome#login', via: :GET
   # Dashboard
-  match '/dashboard', to: 'dashboard#index', via: :GET
+  # match '/dashboard', to: 'dashboard#index', via: :GET
 
   # Product 즉, 모바일 & 태블릿 뷰
-  match '/product', to: 'product#index', via: :GET
-  match '/product/boards', to: 'product#boards', via: :GET
-  match '/product/users', to: 'product#users', via: :GET
+  # match '/product', to: 'product#index', via: :GET
+  # match '/product/boards', to: 'product#boards', via: :GET
+  # match '/product/users', to: 'product#users', via: :GET
   
   # Group routes
   match '/:group_code/:group_id/users', to: 'group#users', via: :GET
