@@ -6,7 +6,7 @@
 
 # API Store > 대용량 SMS 서비스 ( API_SMS_[KEY_NAME] )
 API_SMS_id: "dobestan"
-API_SMS_send_phone: "01022205736"
+API_SMS_send_phone: "0262245736"
 API_SMS_apiVersion: "1"
 API_SMS_clientKey: "MTkyMC0xNDEzODU0NTAwMzU3LTllM2VkOTM3LTYwMTEtNGU2Zi1iZWQ5LTM3NjAxMTNlNmYyMg=="
 

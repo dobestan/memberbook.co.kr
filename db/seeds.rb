@@ -9,6 +9,13 @@ require 'csv'
 
 case Rails.env
 when "development"
+	User.create({
+			name: '현제혁',
+			phone_number: '010-3321-3748',
+			email: 'hook3748@gmail.com',
+			company: '드림픽스튜디오',
+			position: '개발',
+		})
 	# emba_users = User.create([{
 	# 		name: '현제혁',
 	# 		phone_number: '010-3321-3748',
@@ -241,6 +248,14 @@ when "development"
 	# 		group_id: 1
 	# 	}])
 when "production"
+	User.create({
+			name: '현제혁',
+			phone_number: '010-3321-3748',
+			email: 'hook3748@gmail.com',
+			company: '드림픽스튜디오',
+			position: '개발',
+		})
+	
 	# emba_users = []
 
 	# (1..500).each do |idx|

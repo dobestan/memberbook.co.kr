@@ -63,14 +63,17 @@ class UserController < ApplicationController
     user = User.find_by_phone_number(dest_phone)
     puts("User: #{user}")
 
+    master_phone_numbers = ["010-3321-3748", "010-2220-5736"]
+
     if user == nil
       render plain: "fail"
     else
       group = user.groups.first
 
-      if group_code.to_i == group.code.to_i
+      puts "dest_phone: #{dest_phone}"
+      if master_phone_numbers.include? dest_phone || group_code.to_i == group.code.to_i
         authentification_number = (rand() * 1000000).to_i
-        response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "인증번호: #{authentification_number}")
+        response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "멤버북 인증번호: #{authentification_number}")
         flash[:authentification_number] = authentification_number
         render plain: authentification_number
       else

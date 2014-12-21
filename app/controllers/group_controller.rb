@@ -77,4 +77,13 @@ class GroupController < ApplicationController
 			end
 		end
 	end
+
+	# GET /:group_code/intro
+	def intro
+		@group = Group.find_by_code(params[:group_code])
+	end
+
+	# GET /:group_code/howto
+	def howto
+	end
 end
