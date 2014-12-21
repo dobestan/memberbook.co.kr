@@ -2,9 +2,27 @@ class GroupController < ApplicationController
 	# GET /:group_code/:group_id/users
 	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
+	require 'digest'
+
 	def users
-		@group = Group.find(params[:group_id])
-		@users = @group.users
+		yaml = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]
+    key = "memberbook_key_#{params[:group_code]}"
+    accessKey = yaml[key].to_s
+
+		keyFromClient = cookies[:access_token]
+		md5 = Digest::MD5.new
+		keyInput = md5.update("#{keyFromClient}_#{yaml['hash_token']}").to_s
+
+		puts "keyFromClient: #{keyFromClient}"
+		puts "keyInput: #{keyInput}"
+		puts "accessKey: #{accessKey}"
+
+		puts "accessKey == keyInput #{accessKey == keyInput}"
+
+		if accessKey == keyInput
+			@group = Group.find(params[:group_id])
+			@users = @group.users
+		end
 
 		respond_to do |format|
 			format.js { render :partial => "dashboard/users" }

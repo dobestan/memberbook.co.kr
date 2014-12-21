@@ -56,14 +56,30 @@ class UserController < ApplicationController
 
   def get_confirm_number
     dest_phone = params[:phone_number]
+    group_code = params[:group_code]
 
-    authentification_number = (rand() * 1000000).to_i
-    response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "인증번호: #{authentification_number}")
-    flash[:authentification_number] = authentification_number
+    dest_phone = dest_phone.insert(3, '-').insert(8, '-') if dest_phone.length == 11
+    puts("dest_phone: #{dest_phone}")
+    user = User.find_by_phone_number(dest_phone)
+    puts("User: #{user}")
 
-    render plain: authentification_number
+    if user == nil
+      render plain: "fail"
+    else
+      group = user.groups.first
+
+      if group_code.to_i == group.code.to_i
+        authentification_number = (rand() * 1000000).to_i
+        response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "인증번호: #{authentification_number}")
+        flash[:authentification_number] = authentification_number
+        render plain: authentification_number
+      else
+        render plain: "fail"
+      end
+    end
   end
 
+  # :group_code/confirm
   def confirm
     dest_phone = params[:phone_number]
     authentification_number_input = params[:authentification_number]
@@ -71,8 +87,10 @@ class UserController < ApplicationController
     puts "input auth num: #{authentification_number_input}"
     puts "real auth num: #{authentification_number}"
     puts "session[:hi]: #{session[:hi]}"
-    
+
     if authentification_number_input.to_i == authentification_number
+      key = "memberbook_key_#{params[:group_code]}"
+      cookies[:access_token] = key;
       render plain: "success"
     else
       render plain: "fail"

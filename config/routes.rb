@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   match '/about', to: 'welcome#about', via: :GET
   match '/send_sms', to: 'messages#send_sms', via: :GET
   match '/test', to: 'messages#index', via: :GET
-  match '/result', to: 'messages#result',via: :GET
-  match '/email', to: 'messages#send_email',via: :GET
+  match '/result', to: 'messages#result', via: :GET
+  match '/email', to: 'messages#send_email', via: :GET
+  match '/upload_data', to: 'welcome#upload_data', via: :GET
 
   match '/login', to: 'welcome#login', via: :GET
   # Dashboard
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
   match '/:group_code/:group_id/users', to: 'user#create', via: :POST
   match '/users/:user_id', to: 'user#destroy', via: :DELETE
   match '/:group_code/get_confirm_number', to: 'user#get_confirm_number', via: :GET
-  match '/confirm', to: 'user#confirm', via: :GET
+  match '/:group_code/confirm', to: 'user#confirm', via: :GET
 
   # Board routes
   match '/:group_code/boards', to: 'board#create', via: :POST

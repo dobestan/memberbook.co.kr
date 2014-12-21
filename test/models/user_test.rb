@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  require 'csv'
   # test "the truth" do
   #   assert true
   # end
@@ -17,5 +18,13 @@ class UserTest < ActiveSupport::TestCase
   		ancestor_groups << ancestor if not ancestor_groups.include? ancestor 
   	end
   	assert_equal 2, ancestor_groups.size
+  end
+
+  test "insert data from csv" do
+    CSV.foreach('test/users_sub.csv', headers: true) do |row|
+      user = User.create row.to_hash
+      user.save!
+      puts user.inspect
+    end
   end
 end
