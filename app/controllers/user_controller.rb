@@ -75,9 +75,9 @@ class UserController < ApplicationController
         authentification_number = (rand() * 1000000).to_i
         response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "멤버북 인증번호: #{authentification_number}")
         flash[:authentification_number] = authentification_number
-        render plain: authentification_number
+        render plain: "57a6662e0b24625acd88e0db41d42a2bdf454d0e"
       else
-        render plain: "fail"
+        render plain: "96fd92b120ab1f778dfc072b50f577964dd02191"
       end
     end
   end

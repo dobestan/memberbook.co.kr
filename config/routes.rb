@@ -25,20 +25,20 @@ Rails.application.routes.draw do
   # Group routes
   match '/:group_code/:group_id/users', to: 'group#users', via: :GET
   match '/:group_code/:group_id/groups', to: 'group#create', via: :POST
-  match '/groups/:group_id', to: 'group#destroy', via: :DELETE
-  match '/groups/:group_id', to: 'group#update', via: :PUT
+  # match '/groups/:group_id', to: 'group#destroy', via: :DELETE
+  # match '/groups/:group_id', to: 'group#update', via: :PUT
   match '/:group_code/intro', to: 'group#intro', via: :GET
   match '/:group_code/howto', to: 'group#howto', via: :GET
 
   # User routes
-  match '/:group_code/users', to: 'user#users', via: :GET
-  match '/:group_code/:group_id/users', to: 'user#create', via: :POST
-  match '/users/:user_id', to: 'user#destroy', via: :DELETE
+  # match '/:group_code/users', to: 'user#users', via: :GET # 다보임 좆됨
+  # match '/:group_code/:group_id/users', to: 'user#create', via: :POST
+  # match '/users/:user_id', to: 'user#destroy', via: :DELETE
   match '/:group_code/get_confirm_number', to: 'user#get_confirm_number', via: :GET
   match '/:group_code/confirm', to: 'user#confirm', via: :GET
 
   # Board routes
-  match '/:group_code/boards', to: 'board#create', via: :POST
+  # match '/:group_code/boards', to: 'board#create', via: :POST
   match '/:group_code/boards', to: 'board#boards', via: :GET
   match '/:group_code/boards/:board_id', to: 'board#show', via: :GET
 

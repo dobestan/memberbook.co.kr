@@ -1,5 +1,5 @@
 class BoardController < ApplicationController
-
+	layout "product"
 	# POST /:group_code/boards
 	# 학교 ( group_code ) 에 게시글 추가
 	def create

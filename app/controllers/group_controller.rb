@@ -1,9 +1,9 @@
 class GroupController < ApplicationController
+	layout "product"
+	
 	# GET /:group_code/:group_id/users
 	# group code 는 학교 단위 ( 즉, 최상위 그룹 )
 	# group id 는 학교 내부 집단 단위
-	require 'digest'
-
 	def users
 		yaml = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]
     key = "memberbook_key_#{params[:group_code]}"
