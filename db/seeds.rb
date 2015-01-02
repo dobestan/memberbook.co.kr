@@ -19,25 +19,31 @@ when "development"
 	
 	# 성균관대 EMBA
 	emba_groups = Group.create([{
+			name: '성균관대 EMBA',
+			level: 0,
+			code: 0,
+			point: 0,
+		}, {
 			name: '93기',
 			level: 0,
 			code: 0,
-			point: 50000
+			point: 0,
+			parent_id: 1
 		}, {
 			name: '94기',
-			point: 10000,
+			point: 0,
 			level: 1,
 			code: 0,
 			parent_id: 1
 		}, {
 			name: '95기',
-			point: 25000,
+			point: 0,
 			level: 1,
 			code: 0,
 			parent_id: 1
 		}, {
 			name: '96기',
-			point: 5000,
+			point: 0,
 			level: 1,
 			code: 0,
 			parent_id: 1
@@ -45,22 +51,22 @@ when "development"
 
 	CSV.foreach('db/seeds/emba_users_93.csv', headers: true) do |row|
     user = User.create row.to_hash
-    emba_groups[0].users << user
+    emba_groups[1].users << user
   end
 
   CSV.foreach('db/seeds/emba_users_94.csv', headers: true) do |row|
     user = User.create row.to_hash
-    emba_groups[1].users << user
+    emba_groups[2].users << user
   end
 
   CSV.foreach('db/seeds/emba_users_95.csv', headers: true) do |row|
     user = User.create row.to_hash
-    emba_groups[2].users << user
+    emba_groups[3].users << user
   end
 
   CSV.foreach('db/seeds/emba_users_96.csv', headers: true) do |row|
     user = User.create row.to_hash
-    emba_groups[3].users << user
+    emba_groups[4].users << user
   end
 
 	emba_boards = Board.create([{

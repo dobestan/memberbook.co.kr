@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   # Group routes
   match '/:group_code/:group_id/users', to: 'group#users', via: :GET
   match '/:group_code/:group_id/groups', to: 'group#create', via: :POST
+  match '/:group_code/users', to: 'group#all_users', via: :GET
   # match '/groups/:group_id', to: 'group#destroy', via: :DELETE
   # match '/groups/:group_id', to: 'group#update', via: :PUT
   match '/:group_code/intro', to: 'group#intro', via: :GET
