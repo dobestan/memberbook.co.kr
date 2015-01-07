@@ -71,8 +71,12 @@ class UserController < ApplicationController
       group = user.groups.first
 
       puts "dest_phone: #{dest_phone}"
-      if master_phone_numbers.include? dest_phone || group_code.to_i == group.code.to_i
+      puts "group_code.to_i: #{group_code.to_i}"
+      puts "group.code.to_i: #{group.code.to_i}"
+      puts "#{group_code.to_i == group.code.to_i}"
+      if (master_phone_numbers.include? dest_phone) || (group_code.to_i == group.code.to_i)
         authentification_number = (rand() * 1000000).to_i
+        puts "send sms"
         response = JSON.parse SMS_API.send_SMS(dest_phone: dest_phone, msg_body: "멤버북 인증번호: #{authentification_number}")
         flash[:authentification_number] = authentification_number
         render plain: "57a6662e0b24625acd88e0db41d42a2bdf454d0e"
